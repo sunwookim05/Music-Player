@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Andorid/Music-Player/app/src/main/res/drawable/ic_baseline_pause.xml" value="0.337037037037037" />
+        <entry key="..\:/Andorid/Music-Player/app/src/main/res/drawable/ic_baseline_play_arrow.xml" value="0.337037037037037" />
+        <entry key="..\:/Andorid/Music-Player/app/src/main/res/drawable/ic_keyboard_arrow_up_black_24dp.xml" value="0.337037037037037" />
+        <entry key="..\:/Andorid/Music-Player/app/src/main/res/drawable/ic_launcher_background.xml" value="0.337037037037037" />
+        <entry key="..\:/Andorid/Music-Player/app/src/main/res/drawable/ic_left_icon.xml" value="0.337037037037037" />
+        <entry key="..\:/Andorid/Music-Player/app/src/main/res/drawable/ic_person_black_24dp.xml" value="0.337037037037037" />
+        <entry key="..\:/Andorid/Music-Player/app/src/main/res/drawable/ic_repeat_icon.xml" value="0.337037037037037" />
+        <entry key="..\:/Andorid/Music-Player/app/src/main/res/drawable/ic_repeat_on_icon.xml" value="0.337037037037037" />
+        <entry key="..\:/Andorid/Music-Player/app/src/main/res/drawable/ic_replay_red_48dp.xml" value="0.337037037037037" />
+        <entry key="..\:/Andorid/Music-Player/app/src/main/res/drawable/ic_search.xml" value="0.337037037037037" />
+        <entry key="..\:/Andorid/Music-Player/app/src/main/res/drawable/ic_shuffle_black_24dp.xml" value="0.337037037037037" />
+        <entry key="..\:/Andorid/Music-Player/app/src/main/res/drawable/ic_shuffle_on_icon.xml" value="0.337037037037037" />
+        <entry key="..\:/Andorid/Music-Player/app/src/main/res/drawable/layout_border.xml" value="0.337037037037037" />
+        <entry key="..\:/Andorid/Music-Player/app/src/main/res/drawable/line_divider.xml" value="0.337037037037037" />
+        <entry key="..\:/Andorid/Music-Player/app/src/main/res/drawable/music_note_24dp.xml" value="0.337037037037037" />
+        <entry key="..\:/Andorid/Music-Player/app/src/main/res/drawable/next_24dp.xml" value="0.337037037037037" />
+        <entry key="..\:/Andorid/Music-Player/app/src/main/res/drawable/pause_24dp.xml" value="0.337037037037037" />
+        <entry key="..\:/Andorid/Music-Player/app/src/main/res/drawable/play_arrow_24dp.xml" value="0.337037037037037" />
+        <entry key="..\:/Andorid/Music-Player/app/src/main/res/drawable/previous_24dp.xml" value="0.337037037037037" />
+        <entry key="..\:/Andorid/Music-Player/app/src/main/res/layout/activity_album.xml" value="0.3532608695652174" />
+        <entry key="..\:/Andorid/Music-Player/app/src/main/res/layout/activity_main.xml" value="0.38645833333333335" />
+        <entry key="..\:/Andorid/Music-Player/app/src/main/res/layout/activity_player.xml" value="0.38645833333333335" />
+        <entry key="..\:/Andorid/Music-Player/app/src/main/res/layout/adapter_album_layout.xml" value="0.38645833333333335" />
+        <entry key="..\:/Andorid/Music-Player/app/src/main/res/layout/adapter_view_layout.xml" value="0.3482789855072464" />
+        <entry key="..\:/Andorid/Music-Player/app/src/main/res/layout/album_song_layout.xml" value="0.38645833333333335" />
+        <entry key="..\:/Andorid/Music-Player/app/src/main/res/layout/albums_fragment.xml" value="0.38645833333333335" />
+        <entry key="..\:/Andorid/Music-Player/app/src/main/res/layout/songs_fragment.xml" value="0.38645833333333335" />
+        <entry key="..\:/Andorid/Music-Player/app/src/main/res/menu/search_menu.xml" value="0.38645833333333335" />
+        <entry key="..\:/Andorid/Music-Player/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.337037037037037" />
+        <entry key="..\:/Andorid/Music-Player/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.337037037037037" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
