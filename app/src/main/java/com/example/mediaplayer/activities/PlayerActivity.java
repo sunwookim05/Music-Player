@@ -479,30 +479,17 @@ public class PlayerActivity extends AppCompatActivity {
             edit.putBoolean("task",false);
             if (shuffleBoolean) {
                 position = getRandom(Asongs.size() + 1);
-                initPlayer(position);
-                setData(position);
-                getData();
-
-            } else if (!shuffleBoolean) {
+            } else {
                 position = (position + 1) % Asongs.size();
-                initPlayer(position);
-                setData(position);
-                getData();
-
             }
+            initPlayer(position);
         }else{
             if (shuffleBoolean && !repeatBoolean) {
                 position = getRandom(Asongs.size() + 1);
                 initPlayer(position);
-                setData(position);
-                getData();
-
             } else if (!shuffleBoolean && !repeatBoolean) {
                 position = (position + 1) % Asongs.size();
                 initPlayer(position);
-                setData(position);
-                getData();
-
             }
         }
         MainActivity.getInstance().sendOnChannel( Asongs.get(position).getName(), Asongs.get(position).getArtist(),position);
@@ -525,27 +512,19 @@ public class PlayerActivity extends AppCompatActivity {
                 if (shuffleBoolean) {
                     position = getRandom(Asongs.size());
                     initPlayer(position);
-                    setData(position);
-                    getData();
 
                 } else if (!shuffleBoolean) {
                     position = (position - 1) < 0 ? (Asongs.size() - 1) : (position - 1);
                     initPlayer(position);
-                    setData(position);
-                    getData();
                 }
             }else{
                 if (shuffleBoolean && !repeatBoolean) {
                     position = getRandom(Asongs.size());
                     initPlayer(position);
-                    setData(position);
-                    getData();
 
                 } else if (!shuffleBoolean && !repeatBoolean) {
                     position = (position - 1) < 0 ? (Asongs.size() - 1) : (position - 1);
                     initPlayer(position);
-                    setData(position);
-                    getData();
 
                 }
             }
@@ -554,7 +533,6 @@ public class PlayerActivity extends AppCompatActivity {
             PlayerActivity.getInstance().initPlayer((position));
             setData(position);
             getData();
-
         }
 
     }
