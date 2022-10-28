@@ -38,7 +38,6 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="450dp"
-            android:layout_gravity="center"
             android:background="@android:color/transparent">
 
             <ImageView
@@ -98,7 +97,6 @@
                 app:avType="outline"
                 app:avWidth="1dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
