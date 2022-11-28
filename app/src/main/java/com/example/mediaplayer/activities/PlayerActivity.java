@@ -100,9 +100,7 @@ public class PlayerActivity extends AppCompatActivity {
     public void resetPlayer() {
         position = (position - 1) % Asongs.size();
         MainActivity.getInstance().sendOnChannel( Asongs.get(position).getName(), Asongs.get(position).getArtist(),position);
-        PlayerActivity.getInstance().setPosition(position);
-        PlayerActivity.getInstance().initPlayer((position));
-        initPlayer(position);
+        setPosition(position);
         setData(position);
         getData();
     }
@@ -257,7 +255,6 @@ public class PlayerActivity extends AppCompatActivity {
                         })
                         .into(imageView);
             } catch (Exception e) {
-
                 Glide.with(this).load(R.drawable.track).into(imageView);
             }
 
@@ -453,8 +450,6 @@ public class PlayerActivity extends AppCompatActivity {
                 }
             }
         }).start();
-
-
     }
 
     @SuppressLint("HandlerLeak")
@@ -482,27 +477,24 @@ public class PlayerActivity extends AppCompatActivity {
             } else {
                 position = (position + 1) % Asongs.size();
             }
-            initPlayer(position);
         }else{
             if (shuffleBoolean && !repeatBoolean) {
                 position = getRandom(Asongs.size() + 1);
-                initPlayer(position);
             } else if (!shuffleBoolean && !repeatBoolean) {
                 position = (position + 1) % Asongs.size();
-                initPlayer(position);
             }
         }
+        initiateSeekBar();
+        mMediaPlayer.seekTo(0);
         MainActivity.getInstance().sendOnChannel( Asongs.get(position).getName(), Asongs.get(position).getArtist(),position);
         PlayerActivity.getInstance().setPosition(position);
-        PlayerActivity.getInstance().initPlayer((position));
-        setData(position);
-        getData();
+        PlayerActivity.getInstance().setData(position);
+        PlayerActivity.getInstance().getData();
     }
 
     public void musicPrev(boolean btn) {
         if (mMediaPlayer.getCurrentPosition() >= 1000) {
             mMediaPlayer.seekTo(0);
-
         }else{
             if(btn) {
                 SharedPreferences pref = getSharedPreferences("Setting", MODE_PRIVATE);
@@ -511,40 +503,33 @@ public class PlayerActivity extends AppCompatActivity {
                 edit.putBoolean("task",false);
                 if (shuffleBoolean) {
                     position = getRandom(Asongs.size());
-                    initPlayer(position);
-
-                } else if (!shuffleBoolean) {
+                } else {
                     position = (position - 1) < 0 ? (Asongs.size() - 1) : (position - 1);
-                    initPlayer(position);
                 }
             }else{
                 if (shuffleBoolean && !repeatBoolean) {
                     position = getRandom(Asongs.size());
-                    initPlayer(position);
-
                 } else if (!shuffleBoolean && !repeatBoolean) {
                     position = (position - 1) < 0 ? (Asongs.size() - 1) : (position - 1);
-                    initPlayer(position);
-
                 }
             }
-            MainActivity.getInstance().sendOnChannel(Asongs.get(position).getName(), Asongs.get(position).getArtist(), position);
+            initiateSeekBar();
+            mMediaPlayer.seekTo(0);
+            MainActivity.getInstance().sendOnChannel( Asongs.get(position).getName(), Asongs.get(position).getArtist(),position);
             PlayerActivity.getInstance().setPosition(position);
-            PlayerActivity.getInstance().initPlayer((position));
-            setData(position);
-            getData();
+            PlayerActivity.getInstance().setData(position);
+            PlayerActivity.getInstance().getData();
         }
 
     }
 
     //재생/중지
      public void play() {
-
         if (mMediaPlayer != null && !mMediaPlayer.isPlaying()) {
             playin=true;
             mMediaPlayer.start();
             pause.setBackgroundResource(R.drawable.ic_baseline_pause);
-            MainActivity.getInstance().sendOnChannel( Asongs.get(position).getName(), Asongs.get(position).getArtist(),position);
+//            MainActivity.getInstance().sendOnChannel( Asongs.get(position).getName(), Asongs.get(position).getArtist(),position);
             MainActivity.imageView.setBackgroundResource(R.drawable.ic_baseline_pause);
         } else {
             pause();
@@ -557,7 +542,7 @@ public class PlayerActivity extends AppCompatActivity {
             playin=false;
             mMediaPlayer.pause();
             pause.setBackgroundResource(R.drawable.ic_baseline_play_arrow);
-            MainActivity.getInstance().sendOnChannel( Asongs.get(position).getName(), Asongs.get(position).getArtist(),position);
+//            MainActivity.getInstance().sendOnChannel( Asongs.get(position).getName(), Asongs.get(position).getArtist(),position);
             MainActivity.imageView.setBackgroundResource(R.drawable.ic_baseline_play_arrow);
         }
 
