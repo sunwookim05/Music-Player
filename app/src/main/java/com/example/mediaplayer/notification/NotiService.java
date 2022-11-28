@@ -51,24 +51,20 @@ public class NotiService extends Service {
 
         String actionString = playbackAction.getAction();
 
-            if (actionString.equalsIgnoreCase("com.mypackage.ACTION_PAUSE_MUSIC")) {
-                if( PlayerActivity.playin){
-                    PlayerActivity.getInstance().pause();
-                }
-                else{
-                    PlayerActivity.getInstance().play();
-                }
+        if (actionString.equalsIgnoreCase("com.mypackage.ACTION_PAUSE_MUSIC")) {
+            if( PlayerActivity.playin){
+                PlayerActivity.getInstance().pause();
+            }
+            else{
+                PlayerActivity.getInstance().play();
+            }
         } else if (actionString.equalsIgnoreCase("com.mypackage.ACTION_NEXT_MUSIC")) {
                 PlayerActivity.getInstance().getData();
                 PlayerActivity.getInstance().musicNext(true);
-//                PlayerActivity.getInstance().getActivity();
-
 
         } else if (actionString.equalsIgnoreCase("com.mypackage.ACTION_PREV_MUSIC")) {
                 PlayerActivity.getInstance().getData();
                 PlayerActivity.getInstance().musicPrev(true);
-//                PlayerActivity.getInstance().getActivity();
-
         }
 
     }

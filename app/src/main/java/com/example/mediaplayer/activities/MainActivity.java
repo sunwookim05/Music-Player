@@ -2,7 +2,6 @@ package com.example.mediaplayer.activities;
 
 import android.Manifest;
 import android.app.Notification;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,14 +11,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.media.MediaMetadata;
 import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
-import android.os.Build;
-import android.support.v4.media.MediaMetadataCompat;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -27,6 +22,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RemoteViews;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
@@ -63,7 +59,6 @@ import static android.Manifest.permission.CALL_PHONE;
 import static android.Manifest.permission.READ_PHONE_STATE;
 import static android.Manifest.permission.RECORD_AUDIO;
 import static android.Manifest.permission.WAKE_LOCK;
-import static android.content.Context.MODE_PRIVATE;
 import static com.example.mediaplayer.notification.NofiticationCenter.channel_1_ID;
 import static com.example.mediaplayer.adapters.SongAdapter.songs;
 
@@ -266,7 +261,6 @@ public class  MainActivity extends AppCompatActivity {
            e.printStackTrace();
        }
        shift();
-
     }
 
     public void shift(){
@@ -347,7 +341,7 @@ public class  MainActivity extends AppCompatActivity {
                     .addAction(plaorpa, "Pause", playbackAction(1))
                     .addAction(R.drawable.next_24dp, "Next", playbackAction(2))
                     .setContentIntent(contentIntent)
-                    .setContentIntent(content)
+                    .setContentIntent(PlayerActivity.playCheck ? null : content)
                     .setStyle(new NotificationCompat.MediaStyle()
                             .setShowActionsInCompactView(0, 1, 2)
                             .setMediaSession(token))

@@ -21,7 +21,5 @@ public class NofiticationCenter extends Application {
            NotificationManager manager = getSystemService(NotificationManager.class);
            manager.createNotificationChannel(ch1);
        }
-
    }
-
 }
