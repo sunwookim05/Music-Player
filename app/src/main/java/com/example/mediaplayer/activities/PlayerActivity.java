@@ -65,8 +65,6 @@ public class PlayerActivity extends AppCompatActivity {
     public static boolean taskback = false;
     private static boolean npBtn = false;
 
-    public static boolean playCheck = true;
-
     protected NofiticationCenter nofiticationCenter;
     protected LinearLayout linearLayout, linear1;
     private static MediaPlayer mMediaPlayer;
@@ -82,10 +80,6 @@ public class PlayerActivity extends AppCompatActivity {
     }
 
     public int getData() {
-//        int audioSessionId = mMediaPlayer.getAudioSessionId();
-//        if (audioSessionId != -1) {
-//            mVisualizer.setAudioSessionId(audioSessionId);
-//        }
         return position;
     }
 
@@ -163,15 +157,12 @@ public class PlayerActivity extends AppCompatActivity {
 
         if (repeatBoolean == false) {
             repeat_btn.setBackgroundResource(R.drawable.ic_repeat_icon);
-
         } else {
             repeat_btn.setBackgroundResource(R.drawable.ic_repeat_on_icon);
-
         }
 
         if (isPlayin() == true) {
             pause.setBackgroundResource(R.drawable.ic_baseline_pause);
-
         } else {
             pause.setBackgroundResource(R.drawable.ic_baseline_play_arrow);
         }
@@ -221,9 +212,7 @@ public class PlayerActivity extends AppCompatActivity {
     }
 
     //제목,이미지,아티스트 설정
-
     public void setData(int position) {
-
         try {
             String name = Asongs.get(position).getName();
             String artist = Asongs.get(position).getArtist();
@@ -267,7 +256,6 @@ public class PlayerActivity extends AppCompatActivity {
 
     //시크바
     public static void initiateSeekBar() {
-
         mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -350,7 +338,6 @@ public class PlayerActivity extends AppCompatActivity {
 
                 }
                 edit.commit();
-
             }
         });
 
@@ -362,18 +349,14 @@ public class PlayerActivity extends AppCompatActivity {
                     repeatBoolean = false;
                     repeat_btn.setBackgroundResource(R.drawable.ic_repeat_icon);
                     edit.putBoolean("Repeat", false);
-
                 } else {
                     repeatBoolean = true;
                     repeat_btn.setBackgroundResource(R.drawable.ic_repeat_on_icon);
                     edit.putBoolean("Repeat", true);
-
                 }
                 edit.commit();
-
             }
         });
-
     }
 
     //음악 위치
@@ -488,11 +471,11 @@ public class PlayerActivity extends AppCompatActivity {
                 position = (position + 1) % Asongs.size();
             }
         }
+        setPosition(position);
         MainActivity.getInstance().sendOnChannel(Asongs.get(position).getName(), Asongs.get(position).getArtist(), position);
-        PlayerActivity.getInstance().setPosition(position);
-        PlayerActivity.getInstance().setData(position);
-        PlayerActivity.getInstance().getData();
-        PlayerActivity.getInstance().initPlayer(position);
+        setData(position);
+        getData();
+        initPlayer(position);
     }
 
     public void musicPrev(boolean btn) {
@@ -517,11 +500,11 @@ public class PlayerActivity extends AppCompatActivity {
                     position = (position - 1) < 0 ? (Asongs.size() - 1) : (position - 1);
                 }
             }
+            setPosition(position);
             MainActivity.getInstance().sendOnChannel(Asongs.get(position).getName(), Asongs.get(position).getArtist(), position);
-            PlayerActivity.getInstance().setPosition(position);
-            PlayerActivity.getInstance().setData(position);
-            PlayerActivity.getInstance().getData();
-            PlayerActivity.getInstance().initPlayer(position);
+            setData(position);
+            getData();
+            initPlayer(position);
         }
     }
 
@@ -531,7 +514,6 @@ public class PlayerActivity extends AppCompatActivity {
             playin = true;
             mMediaPlayer.start();
             pause.setBackgroundResource(R.drawable.ic_baseline_pause);
-            MainActivity.getInstance().sendOnChannel( Asongs.get(position).getName(), Asongs.get(position).getArtist(),position);
             MainActivity.imageView.setBackgroundResource(R.drawable.ic_baseline_pause);
         } else {
             pause();
@@ -544,7 +526,6 @@ public class PlayerActivity extends AppCompatActivity {
             playin = false;
             mMediaPlayer.pause();
             pause.setBackgroundResource(R.drawable.ic_baseline_play_arrow);
-            MainActivity.getInstance().sendOnChannel( Asongs.get(position).getName(), Asongs.get(position).getArtist(),position);
             MainActivity.imageView.setBackgroundResource(R.drawable.ic_baseline_play_arrow);
         }
     }
@@ -564,7 +545,6 @@ public class PlayerActivity extends AppCompatActivity {
     //백그라운드 설정
     public void setBackground() {
         Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
-
         Palette.from(bitmap).maximumColorCount(32).generate(new Palette.PaletteAsyncListener() {
             @Override
             public void onGenerated(Palette palette) {
@@ -597,32 +577,13 @@ public class PlayerActivity extends AppCompatActivity {
         }
     }
 
-    private void setThemeAnimation(int fromColor, int toColor) {
-
-        @SuppressLint("RestrictedApi")
-        ValueAnimator valueAnimator = ValueAnimator.ofObject(new ArgbEvaluator(), fromColor, toColor);
-        valueAnimator.setDuration(500);
-        valueAnimator.setRepeatCount(ValueAnimator.INFINITE);
-        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animator) {
-                mVisualizer.setColor((int) animator.getAnimatedValue());
-            }
-        });
-        valueAnimator.start();
-    }
-
-
     //뒤로가기
     @Override
     public void onBackPressed() {
-        playCheck = false;
         SharedPreferences pref = getSharedPreferences("Setting", MODE_PRIVATE);
         final SharedPreferences.Editor edit = pref.edit();
         edit.commit();
         setData(position);
-        MainActivity.getInstance().sendOnChannel(Asongs.get(position).getName(), Asongs.get(position).getArtist(), position);
-        onResume();
         taskback = true;
         edit.putBoolean("task", true);
         if (val == 1) {
@@ -635,7 +596,6 @@ public class PlayerActivity extends AppCompatActivity {
 
     @Override
     public void onUserLeaveHint() {
-        playCheck = false;
         SharedPreferences pref = getSharedPreferences("Setting", MODE_PRIVATE);
         final SharedPreferences.Editor edit = pref.edit();
         taskback = true;
@@ -645,14 +605,12 @@ public class PlayerActivity extends AppCompatActivity {
         } else {
             MainActivity.hideAll(false);
         }
-        onResume();
         super.onUserLeaveHint();
     }
 
     //어플 완전히 종료시 알림삭제
     @Override
     public void onDestroy() {
-        playCheck = false;
         if (val == 1) {
             AlbumActivity.hideAll(false);
         } else {
