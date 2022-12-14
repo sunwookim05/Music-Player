@@ -341,7 +341,7 @@ public class  MainActivity extends AppCompatActivity {
                     .addAction(plaorpa, "Pause", playbackAction(1))
                     .addAction(R.drawable.next_24dp, "Next", playbackAction(2))
                     .setContentIntent(contentIntent)
-                    .setContentIntent(PlayerActivity.playCheck ? null : content)
+                    .setContentIntent(PlayerActivity.taskback ? content : null)
                     .setStyle(new NotificationCompat.MediaStyle()
                             .setShowActionsInCompactView(0, 1, 2)
                             .setMediaSession(token))

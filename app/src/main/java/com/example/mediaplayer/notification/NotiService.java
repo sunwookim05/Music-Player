@@ -46,27 +46,20 @@ public class NotiService extends Service {
     //알림창에서 컨트롤
     private void handleIncomingActions(Intent playbackAction) {
         if (playbackAction == null || playbackAction.getAction() == null) return;
-        int pos= PlayerActivity.getInstance().getPosition();
-        int position = PlayerActivity.getInstance().getData();
 
         String actionString = playbackAction.getAction();
 
         if (actionString.equalsIgnoreCase("com.mypackage.ACTION_PAUSE_MUSIC")) {
             if( PlayerActivity.playin){
                 PlayerActivity.getInstance().pause();
-            }
-            else{
+            }else{
                 PlayerActivity.getInstance().play();
             }
         } else if (actionString.equalsIgnoreCase("com.mypackage.ACTION_NEXT_MUSIC")) {
-                PlayerActivity.getInstance().getData();
                 PlayerActivity.getInstance().musicNext(true);
-
         } else if (actionString.equalsIgnoreCase("com.mypackage.ACTION_PREV_MUSIC")) {
-                PlayerActivity.getInstance().getData();
                 PlayerActivity.getInstance().musicPrev(true);
         }
-
     }
 
     @Nullable
