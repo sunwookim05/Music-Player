@@ -65,6 +65,8 @@ public class PlayerActivity extends AppCompatActivity {
     public static boolean taskback = false;
     private static boolean npBtn = false;
 
+    public static boolean playCheck = true;
+
     protected NofiticationCenter nofiticationCenter;
     protected LinearLayout linearLayout, linear1;
     private static MediaPlayer mMediaPlayer;
@@ -514,6 +516,7 @@ public class PlayerActivity extends AppCompatActivity {
             playin = true;
             mMediaPlayer.start();
             pause.setBackgroundResource(R.drawable.ic_baseline_pause);
+            MainActivity.getInstance().sendOnChannel( Asongs.get(position).getName(), Asongs.get(position).getArtist(),position);
             MainActivity.imageView.setBackgroundResource(R.drawable.ic_baseline_pause);
         } else {
             pause();
@@ -526,6 +529,7 @@ public class PlayerActivity extends AppCompatActivity {
             playin = false;
             mMediaPlayer.pause();
             pause.setBackgroundResource(R.drawable.ic_baseline_play_arrow);
+            MainActivity.getInstance().sendOnChannel( Asongs.get(position).getName(), Asongs.get(position).getArtist(),position);
             MainActivity.imageView.setBackgroundResource(R.drawable.ic_baseline_play_arrow);
         }
     }
@@ -580,6 +584,7 @@ public class PlayerActivity extends AppCompatActivity {
     //뒤로가기
     @Override
     public void onBackPressed() {
+        playCheck = false;
         SharedPreferences pref = getSharedPreferences("Setting", MODE_PRIVATE);
         final SharedPreferences.Editor edit = pref.edit();
         edit.commit();
@@ -596,6 +601,7 @@ public class PlayerActivity extends AppCompatActivity {
 
     @Override
     public void onUserLeaveHint() {
+        playCheck = false;
         SharedPreferences pref = getSharedPreferences("Setting", MODE_PRIVATE);
         final SharedPreferences.Editor edit = pref.edit();
         taskback = true;
@@ -611,6 +617,7 @@ public class PlayerActivity extends AppCompatActivity {
     //어플 완전히 종료시 알림삭제
     @Override
     public void onDestroy() {
+        playCheck = false;
         if (val == 1) {
             AlbumActivity.hideAll(false);
         } else {
