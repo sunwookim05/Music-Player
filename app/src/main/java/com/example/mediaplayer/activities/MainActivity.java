@@ -270,7 +270,6 @@ public class  MainActivity extends AppCompatActivity {
             al.add((ArrayList<Song>) pair.getValue());
             it.remove(); // avoids a ConcurrentModificationException
         }
-
     }
 
     //검색
@@ -341,7 +340,7 @@ public class  MainActivity extends AppCompatActivity {
                     .addAction(plaorpa, "Pause", playbackAction(1))
                     .addAction(R.drawable.next_24dp, "Next", playbackAction(2))
                     .setContentIntent(contentIntent)
-                    .setContentIntent(PlayerActivity.taskback ? content : null)
+                    .setContentIntent(content)
                     .setStyle(new NotificationCompat.MediaStyle()
                             .setShowActionsInCompactView(0, 1, 2)
                             .setMediaSession(token))
