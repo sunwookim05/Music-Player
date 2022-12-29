@@ -24,6 +24,8 @@
             android:alwaysRetainTaskState="true"
             android:noHistory="true"
             android:stopWithTask="false"
+            android:launchMode="singleInstance"
+            android:excludeFromRecents="true"
             android:theme="@style/NoactionTrance" />
         <activity
             android:name=".activities.AlbumActivity"

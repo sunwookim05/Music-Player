@@ -190,13 +190,8 @@ public class PlayerActivity extends AppCompatActivity {
                 Asongs = SongAdapter.songs;
             }
             try {
-                initPlayer(position);
-            } catch (NullPointerException e) {
-                e.printStackTrace();
-            }
-
-            try {
                 MainActivity.imageView.setBackgroundResource(R.drawable.ic_baseline_pause);
+                initPlayer(position);
             } catch (NullPointerException e) {
                 e.printStackTrace();
             }
@@ -568,7 +563,6 @@ public class PlayerActivity extends AppCompatActivity {
     public void onPause() {
         try {
             super.onPause();
-
             try {
                 Thread.sleep(10);
                 super.onStart();
@@ -637,5 +631,4 @@ public class PlayerActivity extends AppCompatActivity {
         }
         super.onDestroy();
     }
-
 }
