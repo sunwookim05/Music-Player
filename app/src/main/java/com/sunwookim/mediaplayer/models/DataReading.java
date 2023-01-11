@@ -1,4 +1,4 @@
-package com.musicplayer.mediaplayer.models;
+package com.sunwookim.mediaplayer.models;
 
 import android.content.Context;
 import android.database.Cursor;

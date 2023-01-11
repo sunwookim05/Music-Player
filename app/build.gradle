@@ -4,7 +4,7 @@ android {
     //noinspection GradleCompatible
     compileSdkVersion 31
     defaultConfig {
-        applicationId "com.musicplayer.mediaplayer"
+        applicationId "com.sunwookim.mediaplayer"
         minSdkVersion 16
         //noinspection ExpiredTargetSdkVersion
         targetSdkVersion 31
@@ -18,7 +18,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    namespace 'com.musicplayer.mediaplayer'
+    namespace 'com.sunwookim.mediaplayer'
 }
 
 dependencies {

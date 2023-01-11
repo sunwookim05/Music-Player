@@ -1,4 +1,4 @@
-package com.musicplayer.mediaplayer.adapters;
+package com.sunwookim.mediaplayer.adapters;
 
 import android.app.Activity;
 import android.content.ContentUris;
@@ -20,8 +20,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
-import com.musicplayer.mediaplayer.R;
-import com.musicplayer.mediaplayer.models.Song;
+import com.sunwookim.mediaplayer.R;
+import com.sunwookim.mediaplayer.models.Song;
 
 import java.util.ArrayList;
 import java.util.List;

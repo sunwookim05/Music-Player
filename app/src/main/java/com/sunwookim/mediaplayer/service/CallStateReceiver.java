@@ -1,4 +1,4 @@
-package com.musicplayer.mediaplayer.service;
+package com.sunwookim.mediaplayer.service;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -8,7 +8,7 @@ import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
-import com.musicplayer.mediaplayer.activities.PlayerActivity;
+import com.sunwookim.mediaplayer.activities.PlayerActivity;
 
 public class CallStateReceiver extends BroadcastReceiver {
     static String mLastState;

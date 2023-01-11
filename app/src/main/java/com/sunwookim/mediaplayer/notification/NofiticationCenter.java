@@ -1,4 +1,4 @@
-package com.musicplayer.mediaplayer.notification;
+package com.sunwookim.mediaplayer.notification;
 
 import android.app.Application;
 import android.app.NotificationChannel;

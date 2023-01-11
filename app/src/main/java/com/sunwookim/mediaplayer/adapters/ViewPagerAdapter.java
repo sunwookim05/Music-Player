@@ -1,4 +1,4 @@
-package com.musicplayer.mediaplayer.adapters;
+package com.sunwookim.mediaplayer.adapters;
 
 
 import androidx.annotation.Nullable;
