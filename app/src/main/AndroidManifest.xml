@@ -22,7 +22,6 @@
         <activity
             android:name=".activities.PlayerActivity"
             android:alwaysRetainTaskState="true"
-            android:noHistory="true"
             android:stopWithTask="false"
             android:launchMode="singleInstance"
             android:excludeFromRecents="true"
@@ -31,11 +30,13 @@
             android:name=".activities.AlbumActivity"
             android:alwaysRetainTaskState="true"
             android:stopWithTask="false"
+            android:launchMode="singleInstance"
             android:theme="@style/Transparent"/>
         <activity
             android:name=".activities.MainActivity"
             android:alwaysRetainTaskState="true"
             android:stopWithTask="false"
+            android:launchMode="singleInstance"
             android:theme="@style/Transparent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
