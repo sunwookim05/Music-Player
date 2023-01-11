@@ -1,11 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
+    //noinspection GradleCompatible
     compileSdkVersion 30
     defaultConfig {
         applicationId "com.example.musicplayer"
         minSdkVersion 16
-        //noinspection ExpiringTargetSdkVersion
+        //noinspection ExpiredTargetSdkVersion
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
