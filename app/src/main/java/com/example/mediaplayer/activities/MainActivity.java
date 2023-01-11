@@ -296,12 +296,8 @@ public class  MainActivity extends AppCompatActivity {
     //알림 생성
     public void sendOnChannel(String name,String artist,int position){
         //▶❚❚ ▷| |◁
-            Intent activityIntent = new Intent(this, MainActivity.class),
-                    intent = new Intent(MainActivity.getInstance(), PlayerActivity.class).putExtra("index", 0).putExtra("val", 0).putExtra("from",false);
-            PendingIntent contentIntent = PendingIntent.getActivity(this,
-                    0, activityIntent, 0);
-            PendingIntent content = PendingIntent.getActivity
-                    (this, 0, intent, 0);
+            Intent intent = new Intent(MainActivity.getInstance(), PlayerActivity.class).putExtra("index", 0).putExtra("val", 0).putExtra("from",false);
+            PendingIntent content = PendingIntent.getActivity(this, 0, intent, 0);
 
             int plaorpa;
             if(PlayerActivity.playin){
@@ -336,7 +332,6 @@ public class  MainActivity extends AppCompatActivity {
                     .addAction(R.drawable.previous_24dp, "Previous", playbackAction(3))
                     .addAction(plaorpa, "Pause", playbackAction(1))
                     .addAction(R.drawable.next_24dp, "Next", playbackAction(2))
-                    .setContentIntent(contentIntent)
                     .setContentIntent(content)
                     .setStyle(new NotificationCompat.MediaStyle()
                             .setShowActionsInCompactView(0, 1, 2)
