@@ -1,4 +1,4 @@
-package com.example.mediaplayer.models;
+package com.musicplayer.mediaplayer.models;
 
 import android.graphics.Bitmap;
 

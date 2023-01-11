@@ -1,4 +1,4 @@
-package com.example.mediaplayer.activities;
+package com.musicplayer.mediaplayer.activities;
 
 import android.content.ContentUris;
 import android.content.Intent;
@@ -31,14 +31,11 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
-import com.example.mediaplayer.R;
-import com.example.mediaplayer.adapters.SongAlbumAdapter;
-import com.example.mediaplayer.fragments.AlbumsFragment;
+import com.musicplayer.mediaplayer.R;
+import com.musicplayer.mediaplayer.adapters.SongAlbumAdapter;
 
 import interfaces.OnClickListen;
-import static com.example.mediaplayer.activities.MainActivity.al;
-import static com.example.mediaplayer.activities.MainActivity.notification;
-import static com.example.mediaplayer.activities.MainActivity.textView;
+import static com.musicplayer.mediaplayer.activities.MainActivity.al;
 
 public class AlbumActivity extends AppCompatActivity implements OnClickListen {
 

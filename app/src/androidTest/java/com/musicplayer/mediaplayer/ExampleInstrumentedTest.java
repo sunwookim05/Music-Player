@@ -1,4 +1,4 @@
-package com.example.mediaplayer;
+package com.musicplayer.mediaplayer;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

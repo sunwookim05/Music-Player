@@ -1,4 +1,4 @@
-package com.example.mediaplayer.activities;
+package com.musicplayer.mediaplayer.activities;
 
 import android.Manifest;
 import android.app.Notification;
@@ -43,22 +43,22 @@ import androidx.core.view.MenuItemCompat;
 import androidx.media.app.NotificationCompat;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.mediaplayer.fragments.AlbumsFragment;
-import com.example.mediaplayer.models.DataReading;
-import com.example.mediaplayer.notification.NotiService;
-import com.example.mediaplayer.R;
-import com.example.mediaplayer.models.Song;
-import com.example.mediaplayer.adapters.SongAdapter;
-import com.example.mediaplayer.fragments.SongsFragment;
-import com.example.mediaplayer.adapters.ViewPagerAdapter;
+import com.musicplayer.mediaplayer.fragments.AlbumsFragment;
+import com.musicplayer.mediaplayer.models.DataReading;
+import com.musicplayer.mediaplayer.notification.NotiService;
+import com.musicplayer.mediaplayer.R;
+import com.musicplayer.mediaplayer.models.Song;
+import com.musicplayer.mediaplayer.adapters.SongAdapter;
+import com.musicplayer.mediaplayer.fragments.SongsFragment;
+import com.musicplayer.mediaplayer.adapters.ViewPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 
 import static android.Manifest.permission.CALL_PHONE;
 import static android.Manifest.permission.READ_PHONE_STATE;
 import static android.Manifest.permission.RECORD_AUDIO;
 import static android.Manifest.permission.WAKE_LOCK;
-import static com.example.mediaplayer.notification.NofiticationCenter.channel_1_ID;
-import static com.example.mediaplayer.adapters.SongAdapter.songs;
+import static com.musicplayer.mediaplayer.notification.NofiticationCenter.channel_1_ID;
+import static com.musicplayer.mediaplayer.adapters.SongAdapter.songs;
 
 public class  MainActivity extends AppCompatActivity {
 

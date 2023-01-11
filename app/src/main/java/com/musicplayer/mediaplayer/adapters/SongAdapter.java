@@ -1,4 +1,4 @@
-package com.example.mediaplayer.adapters;
+package com.musicplayer.mediaplayer.adapters;
 
 import android.app.Activity;
 import android.content.ContentUris;
@@ -20,8 +20,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.mediaplayer.R;
-import com.example.mediaplayer.models.Song;
+import com.musicplayer.mediaplayer.R;
+import com.musicplayer.mediaplayer.models.Song;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +56,6 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> im
             viewHolder.textView2.setX(viewHolder.textView2.getX());
             viewHolder.textview1.setTextColor(Color.parseColor("#E7DBDB"));
             try {
-
                 Glide
                         .with(context)
                         .load(ContentUris.withAppendedId(Uri.parse("content://media/external/audio/albumart"), song.getAlbumID()).toString())
@@ -71,7 +70,6 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> im
                         )
                         .into(viewHolder.mImageView);
                 return;
-
                 }catch (Exception e) {
             }
 

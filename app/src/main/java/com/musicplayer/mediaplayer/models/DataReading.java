@@ -1,4 +1,4 @@
-package com.example.mediaplayer.models;
+package com.musicplayer.mediaplayer.models;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -8,7 +8,6 @@ import android.provider.MediaStore;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 
 public class DataReading {
 
