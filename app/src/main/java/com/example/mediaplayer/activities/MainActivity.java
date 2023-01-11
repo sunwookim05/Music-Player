@@ -297,7 +297,7 @@ public class  MainActivity extends AppCompatActivity {
     public void sendOnChannel(String name,String artist,int position){
         //▶❚❚ ▷| |◁
             Intent intent = new Intent(MainActivity.getInstance(), PlayerActivity.class).putExtra("index", 0).putExtra("val", 0).putExtra("from",false);
-            PendingIntent content = PendingIntent.getActivity(this, 0, intent, 0);
+            PendingIntent content = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_MUTABLE);
 
             int plaorpa;
             if(PlayerActivity.playin){
@@ -353,15 +353,15 @@ public class  MainActivity extends AppCompatActivity {
             case 1:
                 // Pause
                 playbackAction.setAction("com.mypackage.ACTION_PAUSE_MUSIC");
-                return PendingIntent.getService(this, actionNumber, playbackAction, 0);
+                return PendingIntent.getService(this, actionNumber, playbackAction, PendingIntent.FLAG_MUTABLE);
             case 2:
                 // Next
                 playbackAction.setAction("com.mypackage.ACTION_NEXT_MUSIC");
-                return PendingIntent.getService(this, actionNumber, playbackAction, 0);
+                return PendingIntent.getService(this, actionNumber, playbackAction, PendingIntent.FLAG_MUTABLE);
             case 3:
                 // Previous
                 playbackAction.setAction("com.mypackage.ACTION_PREV_MUSIC");
-                return PendingIntent.getService(this, actionNumber, playbackAction, 0);
+                return PendingIntent.getService(this, actionNumber, playbackAction, PendingIntent.FLAG_MUTABLE);
             default:
                 break;
         }
