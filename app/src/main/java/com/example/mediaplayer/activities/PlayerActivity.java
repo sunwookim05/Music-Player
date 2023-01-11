@@ -617,18 +617,6 @@ public class PlayerActivity extends AppCompatActivity {
         } else {
             MainActivity.hideAll(false);
         }
-        try {
-            notificationManager.cancelAll();
-            try {
-                Thread.sleep(10);
-                notificationManager.cancelAll();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-                notificationManager.cancelAll();
-            }
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-        }
         super.onDestroy();
     }
 }
