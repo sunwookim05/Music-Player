@@ -1,4 +1,4 @@
-package com.example.mediaplayer.adapters;
+package com.musicplayer.mediaplayer.adapters;
 
 import android.content.ContentUris;
 import android.net.Uri;
@@ -17,9 +17,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.mediaplayer.R;
-import com.example.mediaplayer.models.Song;
-import com.example.mediaplayer.activities.MainActivity;
+import com.musicplayer.mediaplayer.R;
+import com.musicplayer.mediaplayer.models.Song;
+import com.musicplayer.mediaplayer.activities.MainActivity;
 
 import interfaces.OnClickListen;
 

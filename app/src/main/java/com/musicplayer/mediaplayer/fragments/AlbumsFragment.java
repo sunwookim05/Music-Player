@@ -1,4 +1,4 @@
-package com.example.mediaplayer.fragments;
+package com.musicplayer.mediaplayer.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,10 +12,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.mediaplayer.R;
-import com.example.mediaplayer.activities.AlbumActivity;
-import com.example.mediaplayer.activities.MainActivity;
-import com.example.mediaplayer.adapters.AlbumAdapter;
+import com.musicplayer.mediaplayer.R;
+import com.musicplayer.mediaplayer.activities.AlbumActivity;
+import com.musicplayer.mediaplayer.activities.MainActivity;
+import com.musicplayer.mediaplayer.adapters.AlbumAdapter;
 
 import interfaces.OnClickListen;
 

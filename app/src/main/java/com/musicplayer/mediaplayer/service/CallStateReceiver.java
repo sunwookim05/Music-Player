@@ -1,17 +1,14 @@
-package com.example.mediaplayer.service;
+package com.musicplayer.mediaplayer.service;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
-import com.example.mediaplayer.activities.PlayerActivity;
-
-import static android.content.Context.MODE_PRIVATE;
+import com.musicplayer.mediaplayer.activities.PlayerActivity;
 
 public class CallStateReceiver extends BroadcastReceiver {
     static String mLastState;

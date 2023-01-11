@@ -1,4 +1,4 @@
-package com.example.mediaplayer.activities;
+package com.musicplayer.mediaplayer.activities;
 
 import android.Manifest;
 import android.app.Notification;
@@ -43,22 +43,22 @@ import androidx.core.view.MenuItemCompat;
 import androidx.media.app.NotificationCompat;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.mediaplayer.fragments.AlbumsFragment;
-import com.example.mediaplayer.models.DataReading;
-import com.example.mediaplayer.notification.NotiService;
-import com.example.mediaplayer.R;
-import com.example.mediaplayer.models.Song;
-import com.example.mediaplayer.adapters.SongAdapter;
-import com.example.mediaplayer.fragments.SongsFragment;
-import com.example.mediaplayer.adapters.ViewPagerAdapter;
+import com.musicplayer.mediaplayer.fragments.AlbumsFragment;
+import com.musicplayer.mediaplayer.models.DataReading;
+import com.musicplayer.mediaplayer.notification.NotiService;
+import com.musicplayer.mediaplayer.R;
+import com.musicplayer.mediaplayer.models.Song;
+import com.musicplayer.mediaplayer.adapters.SongAdapter;
+import com.musicplayer.mediaplayer.fragments.SongsFragment;
+import com.musicplayer.mediaplayer.adapters.ViewPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 
 import static android.Manifest.permission.CALL_PHONE;
 import static android.Manifest.permission.READ_PHONE_STATE;
 import static android.Manifest.permission.RECORD_AUDIO;
 import static android.Manifest.permission.WAKE_LOCK;
-import static com.example.mediaplayer.notification.NofiticationCenter.channel_1_ID;
-import static com.example.mediaplayer.adapters.SongAdapter.songs;
+import static com.musicplayer.mediaplayer.notification.NofiticationCenter.channel_1_ID;
+import static com.musicplayer.mediaplayer.adapters.SongAdapter.songs;
 
 public class  MainActivity extends AppCompatActivity {
 
@@ -297,7 +297,7 @@ public class  MainActivity extends AppCompatActivity {
     public void sendOnChannel(String name,String artist,int position){
         //▶❚❚ ▷| |◁
             Intent intent = new Intent(MainActivity.getInstance(), PlayerActivity.class).putExtra("index", 0).putExtra("val", 0).putExtra("from",false);
-            PendingIntent content = PendingIntent.getActivity(this, 0, intent, 0);
+            PendingIntent content = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_MUTABLE);
 
             int plaorpa;
             if(PlayerActivity.playin){
@@ -353,15 +353,15 @@ public class  MainActivity extends AppCompatActivity {
             case 1:
                 // Pause
                 playbackAction.setAction("com.mypackage.ACTION_PAUSE_MUSIC");
-                return PendingIntent.getService(this, actionNumber, playbackAction, 0);
+                return PendingIntent.getService(this, actionNumber, playbackAction, PendingIntent.FLAG_MUTABLE);
             case 2:
                 // Next
                 playbackAction.setAction("com.mypackage.ACTION_NEXT_MUSIC");
-                return PendingIntent.getService(this, actionNumber, playbackAction, 0);
+                return PendingIntent.getService(this, actionNumber, playbackAction, PendingIntent.FLAG_MUTABLE);
             case 3:
                 // Previous
                 playbackAction.setAction("com.mypackage.ACTION_PREV_MUSIC");
-                return PendingIntent.getService(this, actionNumber, playbackAction, 0);
+                return PendingIntent.getService(this, actionNumber, playbackAction, PendingIntent.FLAG_MUTABLE);
             default:
                 break;
         }

@@ -1,7 +1,6 @@
-package com.example.mediaplayer.activities;
+package com.musicplayer.mediaplayer.activities;
 
 import android.Manifest;
-import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.content.ContentUris;
 import android.content.Intent;
@@ -24,7 +23,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.palette.graphics.Palette;
-import androidx.vectordrawable.graphics.drawable.ArgbEvaluator;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
@@ -32,11 +30,11 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
-import com.example.mediaplayer.adapters.SongAdapter;
-import com.example.mediaplayer.adapters.SongAlbumAdapter;
-import com.example.mediaplayer.models.Song;
-import com.example.mediaplayer.notification.NofiticationCenter;
-import com.example.mediaplayer.R;
+import com.musicplayer.mediaplayer.R;
+import com.musicplayer.mediaplayer.adapters.SongAdapter;
+import com.musicplayer.mediaplayer.adapters.SongAlbumAdapter;
+import com.musicplayer.mediaplayer.models.Song;
+import com.musicplayer.mediaplayer.notification.NofiticationCenter;
 import com.gauravk.audiovisualizer.visualizer.BarVisualizer;
 
 import java.util.ArrayList;

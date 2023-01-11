@@ -1,4 +1,4 @@
-package com.example.mediaplayer.fragments;
+package com.musicplayer.mediaplayer.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,15 +12,15 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.mediaplayer.R;
-import com.example.mediaplayer.activities.MainActivity;
-import com.example.mediaplayer.activities.PlayerActivity;
-import com.example.mediaplayer.adapters.SongAdapter;
+import com.musicplayer.mediaplayer.R;
+import com.musicplayer.mediaplayer.activities.MainActivity;
+import com.musicplayer.mediaplayer.activities.PlayerActivity;
+import com.musicplayer.mediaplayer.adapters.SongAdapter;
 
 
 import interfaces.OnClickListen;
 
-import static com.example.mediaplayer.adapters.SongAdapter.songs;
+import static com.musicplayer.mediaplayer.adapters.SongAdapter.songs;
 
 public class SongsFragment extends Fragment implements OnClickListen {
    private View v;
