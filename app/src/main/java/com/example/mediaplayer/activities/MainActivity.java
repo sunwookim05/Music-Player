@@ -22,7 +22,6 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RemoteViews;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
@@ -52,7 +51,6 @@ import com.example.mediaplayer.models.Song;
 import com.example.mediaplayer.adapters.SongAdapter;
 import com.example.mediaplayer.fragments.SongsFragment;
 import com.example.mediaplayer.adapters.ViewPagerAdapter;
-import com.example.mediaplayer.service.TaskRemovedService;
 import com.google.android.material.tabs.TabLayout;
 
 import static android.Manifest.permission.CALL_PHONE;
@@ -93,7 +91,6 @@ public class  MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
-        startService(new Intent(this, TaskRemovedService.class));
 
         SharedPreferences pref = getSharedPreferences("Setting", MODE_PRIVATE);
         taskback = pref.getBoolean("task", false);
@@ -397,22 +394,8 @@ public class  MainActivity extends AppCompatActivity {
         super.onUserLeaveHint();
     }
 
-    //어플 완전히 종료시 알림삭제
     @Override
     public void onDestroy() {
-        try {
-            notificationManager.cancelAll();
-            try {
-                Thread.sleep(10);
-                notificationManager.cancelAll();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-                notificationManager.cancelAll();
-            }
-        }catch(NullPointerException e){
-            e.printStackTrace();
-        }
         super.onDestroy();
     }
-
 }
