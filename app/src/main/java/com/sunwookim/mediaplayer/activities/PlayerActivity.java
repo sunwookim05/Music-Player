@@ -1,4 +1,4 @@
-package com.musicplayer.mediaplayer.activities;
+package com.sunwookim.mediaplayer.activities;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -30,11 +30,11 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
-import com.musicplayer.mediaplayer.R;
-import com.musicplayer.mediaplayer.adapters.SongAdapter;
-import com.musicplayer.mediaplayer.adapters.SongAlbumAdapter;
-import com.musicplayer.mediaplayer.models.Song;
-import com.musicplayer.mediaplayer.notification.NofiticationCenter;
+import com.sunwookim.mediaplayer.R;
+import com.sunwookim.mediaplayer.adapters.SongAdapter;
+import com.sunwookim.mediaplayer.adapters.SongAlbumAdapter;
+import com.sunwookim.mediaplayer.models.Song;
+import com.sunwookim.mediaplayer.notification.NofiticationCenter;
 import com.gauravk.audiovisualizer.visualizer.BarVisualizer;
 
 import java.util.ArrayList;

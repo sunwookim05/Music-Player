@@ -1,4 +1,4 @@
-package com.musicplayer.mediaplayer.notification;
+package com.sunwookim.mediaplayer.notification;
 
 import android.app.Service;
 import android.content.Intent;
@@ -8,8 +8,8 @@ import android.os.IBinder;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationManagerCompat;
 
-import com.musicplayer.mediaplayer.activities.MainActivity;
-import com.musicplayer.mediaplayer.activities.PlayerActivity;
+import com.sunwookim.mediaplayer.activities.MainActivity;
+import com.sunwookim.mediaplayer.activities.PlayerActivity;
 
 import java.util.Random;
 

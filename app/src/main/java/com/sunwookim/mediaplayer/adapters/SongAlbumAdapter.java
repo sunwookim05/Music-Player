@@ -1,4 +1,4 @@
-package com.musicplayer.mediaplayer.adapters;
+package com.sunwookim.mediaplayer.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,15 +10,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.musicplayer.mediaplayer.R;
-import com.musicplayer.mediaplayer.activities.MainActivity;
-import com.musicplayer.mediaplayer.models.Song;
+import com.sunwookim.mediaplayer.R;
+import com.sunwookim.mediaplayer.activities.MainActivity;
+import com.sunwookim.mediaplayer.models.Song;
 
 import java.util.ArrayList;
 
 import interfaces.OnClickListen;
 
-import static com.musicplayer.mediaplayer.adapters.SongAdapter.myfont;
+import static com.sunwookim.mediaplayer.adapters.SongAdapter.myfont;
 
 public class SongAlbumAdapter extends RecyclerView.Adapter<SongAlbumAdapter.ViewHolder> implements Filterable {
 

@@ -1,4 +1,4 @@
-package com.musicplayer.mediaplayer;
+package com.sunwookim.mediaplayer;
 
 import org.junit.Test;
 
