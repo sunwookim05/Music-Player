@@ -578,6 +578,7 @@ public class PlayerActivity extends AppCompatActivity {
     //뒤로가기
     @Override
     public void onBackPressed() {
+        Intent intent = new Intent(PlayerActivity.getInstance(), MainActivity.class);
         playCheck = false;
         SharedPreferences pref = getSharedPreferences("Setting", MODE_PRIVATE);
         final SharedPreferences.Editor edit = pref.edit();
@@ -590,6 +591,7 @@ public class PlayerActivity extends AppCompatActivity {
         } else {
             MainActivity.hideAll(false);
         }
+        startActivity(intent);
         super.onBackPressed();
     }
 
