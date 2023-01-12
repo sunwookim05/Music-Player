@@ -318,8 +318,11 @@ public class  MainActivity extends AppCompatActivity {
             }catch (Exception e){
                 artwork = BitmapFactory.decodeResource(getResources(), R.drawable.track_2);
             }
-
-            MediaSessionCompat mediaSession = new MediaSessionCompat(getApplicationContext(), "session tag");
+            try {
+                MediaSessionCompat mediaSession = new MediaSessionCompat(getApplicationContext(), "session tag");
+            }catch (Exception e){
+                e.printStackTrace();
+            }
 
             MediaSessionCompat.Token token = mediaSession.getSessionToken();
 
