@@ -72,7 +72,6 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> im
                 return;
                 }catch (Exception e) {
             }
-
     }
 
     @Override
@@ -114,7 +113,6 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> im
         allSongs=new ArrayList<>(song);
         inflater=(LayoutInflater)context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
         this.monclicklisten=onClickListen;
-
     }
 
     @Override
@@ -146,9 +144,9 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> im
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-        songs.clear();
-        songs.addAll((List)results.values);
-        notifyDataSetChanged();
+            songs.clear();
+            songs.addAll((List)results.values);
+            notifyDataSetChanged();
         }
     };
 }

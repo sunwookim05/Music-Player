@@ -193,13 +193,14 @@ public class  MainActivity extends AppCompatActivity {
                 final SharedPreferences.Editor edit = pref.edit();
                 taskback = false;
                 edit.putBoolean("task",false);
-                hideAll(true);
-                Intent intent = new Intent(MainActivity.getInstance(), PlayerActivity.class).putExtra("index", 0).putExtra("val", 0).putExtra("from",false);
-                startActivity(intent);
+                if(songs.isEmpty()) {
+                    Toast.makeText(MainActivity.this, "There are no playlists.", Toast.LENGTH_SHORT).show();
+                }else{
+                    Intent intent = new Intent(MainActivity.this, PlayerActivity.class);
+                    startActivity(intent);
+                }
             }
         });
-
-
     }
 
     public static MainActivity getInstance() {
@@ -224,7 +225,7 @@ public class  MainActivity extends AppCompatActivity {
             }).create().show();
 
         }else{
-                ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,RECORD_AUDIO,READ_PHONE_STATE,CALL_PHONE,WAKE_LOCK},Storage_Permission_code);
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,RECORD_AUDIO,READ_PHONE_STATE,CALL_PHONE,WAKE_LOCK},Storage_Permission_code);
         }
     }
 
@@ -253,7 +254,6 @@ public class  MainActivity extends AppCompatActivity {
        try {
            int position= PlayerActivity.getInstance().getPosition();
            playerActivity.setData(position);
-
        }catch(NullPointerException e){
            e.printStackTrace();
        }
