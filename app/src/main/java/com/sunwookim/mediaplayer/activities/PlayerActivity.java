@@ -466,11 +466,15 @@ public class PlayerActivity extends AppCompatActivity {
                 position = (position + 1) % Asongs.size();
             }
         }
-        setPosition(position);
-        MainActivity.getInstance().sendOnChannel(Asongs.get(position).getName(), Asongs.get(position).getArtist(), position);
-        setData(position);
-        getData();
-        initPlayer(position);
+        try {
+            setPosition(position);
+            MainActivity.getInstance().sendOnChannel(Asongs.get(position).getName(), Asongs.get(position).getArtist(), position);
+            setData(position);
+            getData();
+            initPlayer(position);
+        }catch (IndexOutOfBoundsException e){
+            System.out.println(e);
+        }
     }
 
     public void musicPrev(boolean btn) {
@@ -495,11 +499,15 @@ public class PlayerActivity extends AppCompatActivity {
                     position = (position - 1) < 0 ? (Asongs.size() - 1) : (position - 1);
                 }
             }
-            setPosition(position);
-            MainActivity.getInstance().sendOnChannel(Asongs.get(position).getName(), Asongs.get(position).getArtist(), position);
-            setData(position);
-            getData();
-            initPlayer(position);
+            try {
+                setPosition(position);
+                MainActivity.getInstance().sendOnChannel(Asongs.get(position).getName(), Asongs.get(position).getArtist(), position);
+                setData(position);
+                getData();
+                initPlayer(position);
+            }catch (IndexOutOfBoundsException e){
+                System.out.println(e);
+            }
         }
     }
 
