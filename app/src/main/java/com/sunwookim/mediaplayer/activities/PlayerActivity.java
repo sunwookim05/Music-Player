@@ -145,7 +145,7 @@ public class PlayerActivity extends AppCompatActivity {
 
         //셔플버튼 on/off 유무
 
-        if (shuffleBoolean == false) {
+        if (!shuffleBoolean) {
             shuffle_btn.setBackgroundResource(R.drawable.ic_shuffle_black_24dp);
 
         } else {
@@ -155,13 +155,13 @@ public class PlayerActivity extends AppCompatActivity {
 
         //반복버튼 on/off 유무
 
-        if (repeatBoolean == false) {
+        if (!repeatBoolean) {
             repeat_btn.setBackgroundResource(R.drawable.ic_repeat_icon);
         } else {
             repeat_btn.setBackgroundResource(R.drawable.ic_repeat_on_icon);
         }
 
-        if (isPlayin() == true) {
+        if (isPlayin()) {
             pause.setBackgroundResource(R.drawable.ic_baseline_pause);
         } else {
             pause.setBackgroundResource(R.drawable.ic_baseline_play_arrow);
@@ -470,7 +470,6 @@ public class PlayerActivity extends AppCompatActivity {
             setPosition(position);
             MainActivity.getInstance().sendOnChannel(Asongs.get(position).getName(), Asongs.get(position).getArtist(), position);
             setData(position);
-            getData();
             initPlayer(position);
         }catch (IndexOutOfBoundsException e){
             System.out.println(e);
@@ -503,7 +502,6 @@ public class PlayerActivity extends AppCompatActivity {
                 setPosition(position);
                 MainActivity.getInstance().sendOnChannel(Asongs.get(position).getName(), Asongs.get(position).getArtist(), position);
                 setData(position);
-                getData();
                 initPlayer(position);
             }catch (IndexOutOfBoundsException e){
                 System.out.println(e);

@@ -173,7 +173,7 @@ public class  MainActivity extends AppCompatActivity {
                 final SharedPreferences.Editor edit = pref.edit();
                 taskback = false;
                 edit.putBoolean("task",false);
-                if(PlayerActivity.playin == true){
+                if(PlayerActivity.playin){
                     imageView.setBackgroundResource(R.drawable.ic_baseline_pause);
                 }else {
                     imageView.setBackgroundResource(R.drawable.ic_baseline_play_arrow);
@@ -341,7 +341,7 @@ public class  MainActivity extends AppCompatActivity {
                             .setMediaSession(token))
                     .build();
 
-            if(PlayerActivity.isPlayin() == true){
+            if(PlayerActivity.isPlayin()){
                 notification.flags = Notification.FLAG_NO_CLEAR;
             }else {
                 notification.flags = Notification.FLAG_AUTO_CANCEL;
