@@ -13,6 +13,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.os.Bundle;
 import android.view.Menu;
@@ -32,6 +33,7 @@ import java.util.List;
 import java.util.Map;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -54,6 +56,9 @@ import com.sunwookim.mediaplayer.adapters.ViewPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 
 import static android.Manifest.permission.CALL_PHONE;
+import static android.Manifest.permission.READ_MEDIA_AUDIO;
+import static android.Manifest.permission.READ_MEDIA_IMAGES;
+import static android.Manifest.permission.READ_MEDIA_VIDEO;
 import static android.Manifest.permission.READ_PHONE_STATE;
 import static android.Manifest.permission.RECORD_AUDIO;
 import static android.Manifest.permission.WAKE_LOCK;
@@ -210,11 +215,11 @@ public class  MainActivity extends AppCompatActivity {
    //권한
     private void requestStoragePermission(){
 
-        if(ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.READ_EXTERNAL_STORAGE)){
+        if(ActivityCompat.shouldShowRequestPermissionRationale(this, READ_MEDIA_AUDIO)){
             new AlertDialog.Builder(this).setTitle("Permission Needed").setMessage("Need to read and record songs from your storage.").setPositiveButton("Okay", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,RECORD_AUDIO,READ_PHONE_STATE,CALL_PHONE,WAKE_LOCK},Storage_Permission_code);
+                    ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,RECORD_AUDIO,READ_PHONE_STATE,CALL_PHONE,WAKE_LOCK,READ_MEDIA_AUDIO,READ_MEDIA_IMAGES,READ_MEDIA_VIDEO},Storage_Permission_code);
 
                 }
             }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -225,7 +230,7 @@ public class  MainActivity extends AppCompatActivity {
             }).create().show();
 
         }else{
-            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,RECORD_AUDIO,READ_PHONE_STATE,CALL_PHONE,WAKE_LOCK},Storage_Permission_code);
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,RECORD_AUDIO,READ_PHONE_STATE,CALL_PHONE,WAKE_LOCK,READ_MEDIA_AUDIO,READ_MEDIA_IMAGES,READ_MEDIA_VIDEO},Storage_Permission_code);
         }
     }
 
@@ -233,8 +238,8 @@ public class  MainActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if(requestCode==Storage_Permission_code){
             if(grantResults.length>0&&grantResults[0]==PackageManager.PERMISSION_GRANTED){
-            Toast.makeText(this,"Permission Granted",Toast.LENGTH_SHORT).show();
-            start();
+                Toast.makeText(this,"Permission Granted",Toast.LENGTH_SHORT).show();
+                start();
             }else{
                 Toast.makeText(this,"Permission Denied",Toast.LENGTH_SHORT).show();
             }

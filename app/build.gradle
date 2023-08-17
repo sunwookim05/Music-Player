@@ -2,12 +2,12 @@ apply plugin: 'com.android.application'
 
 android {
     //noinspection GradleCompatible
-    compileSdkVersion 33
+    compileSdkVersion 34
     defaultConfig {
         applicationId "com.sunwookim.mediaplayer"
         minSdkVersion 26
         //noinspection ExpiredTargetSdkVersion
-        targetSdkVersion 33
+        targetSdkVersion 34
         versionCode 6
         versionName "1.5"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"

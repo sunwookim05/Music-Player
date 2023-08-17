@@ -147,10 +147,8 @@ public class PlayerActivity extends AppCompatActivity {
 
         if (!shuffleBoolean) {
             shuffle_btn.setBackgroundResource(R.drawable.ic_shuffle_black_24dp);
-
         } else {
             shuffle_btn.setBackgroundResource(R.drawable.ic_shuffle_on_icon);
-
         }
 
         //반복버튼 on/off 유무

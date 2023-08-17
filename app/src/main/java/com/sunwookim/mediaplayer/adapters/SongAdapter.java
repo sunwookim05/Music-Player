@@ -71,12 +71,18 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> im
                         .into(viewHolder.mImageView);
                 return;
                 }catch (Exception e) {
+                e.printStackTrace();
             }
     }
 
     @Override
     public int getItemCount() {
-        return songs.size();
+        try {
+            return songs.size();
+        }catch (Exception e){
+            e.printStackTrace();
+            return 0;
+        }
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -108,16 +114,20 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> im
     }
 
     public SongAdapter(Activity context, ArrayList<Song> song,OnClickListen onClickListen) {
-        this.context = context;
-        this.songs = song;
-        allSongs=new ArrayList<>(song);
-        inflater=(LayoutInflater)context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
-        this.monclicklisten=onClickListen;
+        try {
+            this.context = context;
+            this.songs = song;
+            allSongs = new ArrayList<>(song);
+            inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+            this.monclicklisten = onClickListen;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
     public Filter getFilter(){
-    return filter;
+        return filter;
     }
 
     private Filter  filter=new Filter() {
