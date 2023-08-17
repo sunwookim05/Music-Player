@@ -36,14 +36,19 @@ public class SongsFragment extends Fragment implements OnClickListen {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        v=inflater.inflate(R.layout.songs_fragment,container,false);
-        recyclerView = v.findViewById(R.id.recycleview);
-        recyclerView.setHasFixedSize(true);
-        mmanager=new LinearLayoutManager(getContext());
-        songAdapter = new SongAdapter(MainActivity.getInstance(), songs,this);
-        recyclerView.setLayoutManager(mmanager);
-        recyclerView.setAdapter(songAdapter);
-        return v;
+        try {
+            v = inflater.inflate(R.layout.songs_fragment, container, false);
+            recyclerView = v.findViewById(R.id.recycleview);
+            recyclerView.setHasFixedSize(true);
+            mmanager = new LinearLayoutManager(getContext());
+            songAdapter = new SongAdapter(MainActivity.getInstance(), songs, this);
+            recyclerView.setLayoutManager(mmanager);
+            recyclerView.setAdapter(songAdapter);
+            return v;
+        }catch (Exception e){
+            e.printStackTrace();
+            return v;
+        }
     }
 
 
