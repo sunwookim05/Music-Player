@@ -178,7 +178,7 @@ public class  MainActivity extends AppCompatActivity {
                 final SharedPreferences.Editor edit = pref.edit();
                 taskback = false;
                 edit.putBoolean("task",false);
-                if(PlayerActivity.playin == true){
+                if(PlayerActivity.playin){
                     imageView.setBackgroundResource(R.drawable.ic_baseline_pause);
                 }else {
                     imageView.setBackgroundResource(R.drawable.ic_baseline_play_arrow);
