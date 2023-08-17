@@ -346,7 +346,7 @@ public class  MainActivity extends AppCompatActivity {
                             .setMediaSession(token))
                     .build();
 
-            if(PlayerActivity.isPlayin() == true){
+            if(PlayerActivity.isPlayin()){
                 notification.flags = Notification.FLAG_NO_CLEAR;
             }else {
                 notification.flags = Notification.FLAG_AUTO_CANCEL;
