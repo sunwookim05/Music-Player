@@ -67,7 +67,7 @@ import static com.sunwookim.mediaplayer.adapters.SongAdapter.songs;
 
 public class  MainActivity extends AppCompatActivity {
 
-    private int Storage_Permission_code=1;
+    private final int Storage_Permission_code = 1;
     private static final String TAG = "MainActivity";
     DataReading dataReading;
     protected static MainActivity instance;
@@ -149,23 +149,13 @@ public class  MainActivity extends AppCompatActivity {
     }
 
     public static void hideAll(boolean hide){
-        if(hide){
-            textView.setVisibility(View.INVISIBLE);
-            tableLayout.setVisibility(View.INVISIBLE);
-            viewPager.setVisibility(View.INVISIBLE);
-            tableLayout.setVisibility(View.INVISIBLE);
-            imageView.setVisibility(View.INVISIBLE);
-            miniplayer.setVisibility(View.INVISIBLE);
-            hideTitle = true;
-        }else{
-            textView.setVisibility(View.VISIBLE);
-            tableLayout.setVisibility(View.VISIBLE);
-            viewPager.setVisibility(View.VISIBLE);
-            tableLayout.setVisibility(View.VISIBLE);
-            imageView.setVisibility(View.VISIBLE);
-            miniplayer.setVisibility(View.VISIBLE);
-            hideTitle = false;
-        }
+        textView.setVisibility(hide ? View.INVISIBLE : View.VISIBLE);
+        tableLayout.setVisibility(hide ? View.INVISIBLE : View.VISIBLE);
+        viewPager.setVisibility(hide ? View.INVISIBLE : View.VISIBLE);
+        tableLayout.setVisibility(hide ? View.INVISIBLE : View.VISIBLE);
+        imageView.setVisibility(hide ? View.INVISIBLE : View.VISIBLE);
+        miniplayer.setVisibility(hide ? View.INVISIBLE : View.VISIBLE);
+        hideTitle = hide;
         MainActivity.getInstance().titleBar();
     }
 
@@ -219,7 +209,11 @@ public class  MainActivity extends AppCompatActivity {
             new AlertDialog.Builder(this).setTitle("Permission Needed").setMessage("Need to read and record songs from your storage.").setPositiveButton("Okay", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,RECORD_AUDIO,READ_PHONE_STATE,CALL_PHONE,WAKE_LOCK,READ_MEDIA_AUDIO,READ_MEDIA_IMAGES,READ_MEDIA_VIDEO},Storage_Permission_code);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                        ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,RECORD_AUDIO,READ_PHONE_STATE,CALL_PHONE,WAKE_LOCK,READ_MEDIA_AUDIO,READ_MEDIA_IMAGES,READ_MEDIA_VIDEO},Storage_Permission_code);
+                    }else{
+                        ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,RECORD_AUDIO,READ_PHONE_STATE,CALL_PHONE,WAKE_LOCK},Storage_Permission_code);
+                    }
 
                 }
             }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -230,14 +224,18 @@ public class  MainActivity extends AppCompatActivity {
             }).create().show();
 
         }else{
-            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,RECORD_AUDIO,READ_PHONE_STATE,CALL_PHONE,WAKE_LOCK,READ_MEDIA_AUDIO,READ_MEDIA_IMAGES,READ_MEDIA_VIDEO},Storage_Permission_code);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, RECORD_AUDIO, READ_PHONE_STATE, CALL_PHONE, WAKE_LOCK, READ_MEDIA_AUDIO, READ_MEDIA_IMAGES, READ_MEDIA_VIDEO}, Storage_Permission_code);
+            }else{
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,RECORD_AUDIO,READ_PHONE_STATE,CALL_PHONE,WAKE_LOCK},Storage_Permission_code);
+            }
         }
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if(requestCode==Storage_Permission_code){
-            if(grantResults.length>0&&grantResults[0]==PackageManager.PERMISSION_GRANTED){
+            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                 Toast.makeText(this,"Permission Granted",Toast.LENGTH_SHORT).show();
                 start();
             }else{
@@ -248,21 +246,21 @@ public class  MainActivity extends AppCompatActivity {
 
     //시작
     private void start() {
-       dataReading=new DataReading(this);
-       songs=new ArrayList<>();
-       songs.add(new Song());
-       ArrayList<Song> songs = dataReading.getAllAudioFromDevice();
-       Collections.sort(songs);
-       SongAdapter.songs=songs;
-       albums=dataReading.getAlbums();
-       textView.setText("Choose your music.");
-       try {
-           int position= PlayerActivity.getInstance().getPosition();
-           playerActivity.setData(position);
-       }catch(NullPointerException e){
-           e.printStackTrace();
-       }
-       shift();
+        dataReading=new DataReading(this);
+        songs=new ArrayList<>();
+        songs.add(new Song());
+        ArrayList<Song> songs = dataReading.getAllAudioFromDevice();
+        Collections.sort(songs);
+        SongAdapter.songs=songs;
+        albums=dataReading.getAlbums();
+        textView.setText("Choose your music.");
+        try {
+            int position= PlayerActivity.getInstance().getPosition();
+            playerActivity.setData(position);
+        }catch(NullPointerException e){
+            e.printStackTrace();
+        }
+        shift();
     }
 
     public void shift(){

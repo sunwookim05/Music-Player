@@ -142,28 +142,9 @@ public class PlayerActivity extends AppCompatActivity {
         }
 
         mVisualizer = findViewById(R.id.bar);
-
-        //셔플버튼 on/off 유무
-
-        if (!shuffleBoolean) {
-            shuffle_btn.setBackgroundResource(R.drawable.ic_shuffle_black_24dp);
-        } else {
-            shuffle_btn.setBackgroundResource(R.drawable.ic_shuffle_on_icon);
-        }
-
-        //반복버튼 on/off 유무
-
-        if (!repeatBoolean) {
-            repeat_btn.setBackgroundResource(R.drawable.ic_repeat_icon);
-        } else {
-            repeat_btn.setBackgroundResource(R.drawable.ic_repeat_on_icon);
-        }
-
-        if (isPlayin()) {
-            pause.setBackgroundResource(R.drawable.ic_baseline_pause);
-        } else {
-            pause.setBackgroundResource(R.drawable.ic_baseline_play_arrow);
-        }
+        shuffle_btn.setBackgroundResource(shuffleBoolean ? R.drawable.ic_shuffle_on_icon : R.drawable.ic_shuffle_black_24dp);
+        repeat_btn.setBackgroundResource(repeatBoolean ? R.drawable.ic_repeat_on_icon : R.drawable.ic_repeat_icon);
+        pause.setBackgroundResource(isPlayin() ?  R.drawable.ic_baseline_pause : R.drawable.ic_baseline_play_arrow);
 
         if (instance != null && place == false) {
             songTitle.setText(instance.songTitle.getText());
@@ -180,11 +161,7 @@ public class PlayerActivity extends AppCompatActivity {
                 mMediaPlayer.stop();
             }
             instance = this;
-            if (val == 1) {
-                Asongs = SongAlbumAdapter.albumSong;
-            } else {
-                Asongs = SongAdapter.songs;
-            }
+            Asongs = val == 1 ? SongAlbumAdapter.albumSong : SongAdapter.songs;
             try {
                 MainActivity.imageView.setBackgroundResource(R.drawable.ic_baseline_pause);
                 initPlayer(position);
@@ -319,17 +296,9 @@ public class PlayerActivity extends AppCompatActivity {
         shuffle_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (shuffleBoolean) {
-                    shuffleBoolean = false;
-                    shuffle_btn.setBackgroundResource(R.drawable.ic_shuffle_black_24dp);
-                    edit.putBoolean("Shuffle", false);
-
-                } else {
-                    shuffleBoolean = true;
-                    shuffle_btn.setBackgroundResource(R.drawable.ic_shuffle_on_icon);
-                    edit.putBoolean("Shuffle", true);
-
-                }
+                shuffleBoolean = !shuffleBoolean;
+                shuffle_btn.setBackgroundResource(shuffleBoolean ? R.drawable.ic_shuffle_on_icon : R.drawable.ic_shuffle_black_24dp);
+                edit.putBoolean("Shuffle", shuffleBoolean);
                 edit.commit();
             }
         });
@@ -338,15 +307,9 @@ public class PlayerActivity extends AppCompatActivity {
         repeat_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (repeatBoolean) {
-                    repeatBoolean = false;
-                    repeat_btn.setBackgroundResource(R.drawable.ic_repeat_icon);
-                    edit.putBoolean("Repeat", false);
-                } else {
-                    repeatBoolean = true;
-                    repeat_btn.setBackgroundResource(R.drawable.ic_repeat_on_icon);
-                    edit.putBoolean("Repeat", true);
-                }
+                repeatBoolean = !repeatBoolean;
+                repeat_btn.setBackgroundResource(repeatBoolean ? R.drawable.ic_repeat_on_icon: R.drawable.ic_repeat_icon);
+                edit.putBoolean("Repeat", repeatBoolean);
                 edit.commit();
             }
         });
@@ -452,11 +415,7 @@ public class PlayerActivity extends AppCompatActivity {
             final SharedPreferences.Editor edit = pref.edit();
             taskback = false;
             edit.putBoolean("task", false);
-            if (shuffleBoolean) {
-                position = getRandom(Asongs.size() + 1);
-            } else {
-                position = (position + 1) % Asongs.size();
-            }
+            position = shuffleBoolean ? getRandom(Asongs.size() + 1) : (position + 1) % Asongs.size();
         } else {
             if (shuffleBoolean && !repeatBoolean) {
                 position = getRandom(Asongs.size() + 1);
@@ -484,11 +443,7 @@ public class PlayerActivity extends AppCompatActivity {
                 final SharedPreferences.Editor edit = pref.edit();
                 taskback = false;
                 edit.putBoolean("task", false);
-                if (shuffleBoolean) {
-                    position = getRandom(Asongs.size());
-                } else {
-                    position = (position - 1) < 0 ? (Asongs.size() - 1) : (position - 1);
-                }
+                position = shuffleBoolean ? getRandom(Asongs.size()) : (position - 1) < 0 ? (Asongs.size() - 1) : (position - 1);
             } else {
                 if (shuffleBoolean && !repeatBoolean) {
                     position = getRandom(Asongs.size());
@@ -588,11 +543,8 @@ public class PlayerActivity extends AppCompatActivity {
         setData(position);
         taskback = true;
         edit.putBoolean("task", true);
-        if (val == 1) {
-            AlbumActivity.hideAll(false);
-        } else {
-            MainActivity.hideAll(false);
-        }
+        if (val == 1) AlbumActivity.hideAll(false);
+        else MainActivity.hideAll(false);
         startActivity(intent);
         super.onBackPressed();
     }
@@ -604,11 +556,8 @@ public class PlayerActivity extends AppCompatActivity {
         final SharedPreferences.Editor edit = pref.edit();
         taskback = true;
         edit.putBoolean("task", true);
-        if (val == 1) {
-            AlbumActivity.hideAll(false);
-        } else {
-            MainActivity.hideAll(false);
-        }
+        if (val == 1) AlbumActivity.hideAll(false);
+        else MainActivity.hideAll(false);
         super.onUserLeaveHint();
     }
 
@@ -616,11 +565,8 @@ public class PlayerActivity extends AppCompatActivity {
     @Override
     public void onDestroy() {
         playCheck = false;
-        if (val == 1) {
-            AlbumActivity.hideAll(false);
-        } else {
-            MainActivity.hideAll(false);
-        }
+        if (val == 1) AlbumActivity.hideAll(false);
+        else MainActivity.hideAll(false);
         super.onDestroy();
     }
 }
