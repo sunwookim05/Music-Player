@@ -92,11 +92,11 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> im
     OnClickListen onClickListen;
         public ViewHolder(@NonNull View itemView,OnClickListen onClickListen) {
             super(itemView);
-            mImageView=itemView.findViewById(R.id.imageView);
-            textview1=itemView.findViewById(R.id.textViewSongTitle);
+            mImageView = itemView.findViewById(R.id.imageView);
+            textview1 = itemView.findViewById(R.id.textViewSongTitle);
             textview1.setTypeface(myfont);
-            textView2=itemView.findViewById(R.id.textViewArtistName);
-            this.onClickListen=onClickListen;
+            textView2 = itemView.findViewById(R.id.textViewArtistName);
+            this.onClickListen = onClickListen;
             itemView.setOnClickListener(this);
         }
 
@@ -134,11 +134,11 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> im
     @Override
     protected FilterResults performFiltering(CharSequence constraint) {
         List<Song>filteredList=new ArrayList<>();
-        if(constraint==null||constraint.length()==0){
+        if(constraint == null || constraint.length() == 0){
             filteredList.addAll(allSongs);
 
         }else{
-            String filterpattern=constraint.toString().toLowerCase().trim();
+            String filterpattern = constraint.toString().toLowerCase().trim();
 
             for (Song oneSong:allSongs){
                 if(oneSong.getName().toLowerCase().startsWith(filterpattern)||oneSong.getArtist().toLowerCase().startsWith(filterpattern)){

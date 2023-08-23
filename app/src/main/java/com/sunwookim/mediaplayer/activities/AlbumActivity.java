@@ -114,21 +114,12 @@ public class AlbumActivity extends AppCompatActivity implements OnClickListen {
     }
 
     public static void hideAll(boolean hide){
-        if(hide){
-            textView1.setVisibility(View.INVISIBLE);
-            textView2.setVisibility(View.INVISIBLE);
-            recyclerView.setVisibility(View.INVISIBLE);
-            imageView.setVisibility(View.INVISIBLE);
-            linearLayout.setVisibility(View.INVISIBLE);
-            hideTitle = true;
-        }else{
-            textView1.setVisibility(View.VISIBLE);
-            textView2.setVisibility(View.VISIBLE);
-            recyclerView.setVisibility(View.VISIBLE);
-            imageView.setVisibility(View.VISIBLE);
-            linearLayout.setVisibility(View.VISIBLE);
-            hideTitle = false;
-        }
+        textView1.setVisibility(hide ? View.INVISIBLE : View.VISIBLE);
+        textView2.setVisibility(hide ? View.INVISIBLE : View.VISIBLE);
+        recyclerView.setVisibility(hide ? View.INVISIBLE : View.VISIBLE);
+        imageView.setVisibility(hide ? View.INVISIBLE : View.VISIBLE);
+        linearLayout.setVisibility(hide ? View.INVISIBLE : View.VISIBLE);
+        hideTitle = hide;
     }
 
     @Override
