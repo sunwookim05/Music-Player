@@ -42,7 +42,7 @@ import java.util.Random;
 
 public class PlayerActivity extends AppCompatActivity {
     public static final int AUDIO_PERMISSION_REQUEST_CODE = 102;
-
+    private static boolean canRun = true;
     public static final String[] WRITE_EXTERNAL_STORAGE_PERMS = {
             Manifest.permission.RECORD_AUDIO
     };
@@ -61,10 +61,10 @@ public class PlayerActivity extends AppCompatActivity {
     private Palette.Swatch DarkVibrantSwatch;
     private Palette.Swatch darkMutedSwatch;
     public static boolean taskback = false;
-    private static boolean npBtn = false;
 
     public static boolean playCheck = true;
 
+    private  int tcout;
     protected NofiticationCenter nofiticationCenter;
     protected LinearLayout linearLayout, linear1;
     private static MediaPlayer mMediaPlayer;
@@ -188,7 +188,7 @@ public class PlayerActivity extends AppCompatActivity {
             String artist = Asongs.get(position).getArtist();
             songTitle.setText(name);
             artistname.setText(artist);
-            MainActivity.getInstance().textView.setText(name);
+            MainActivity.textView.setText(name);
             try {
                 int audioSessionId = mMediaPlayer.getAudioSessionId();
                 if (audioSessionId != -1) {
@@ -368,29 +368,28 @@ public class PlayerActivity extends AppCompatActivity {
         initiateSeekBar();
 
         //재생 위치 1초마다 표시
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (mMediaPlayer != null && !Thread.currentThread().isInterrupted()) {
-                    try {
-                        if (mMediaPlayer.isPlaying()) {
-                            Message msg = new Message();
-                            msg.what = mMediaPlayer.getCurrentPosition();
-                            msg.arg1 = mMediaPlayer.getDuration();
-                            handler.sendMessage(msg);
-                            Thread.sleep(1000);
+        if(canRun) {
+            canRun = false;
+            Thread thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    while (mMediaPlayer != null && !Thread.currentThread().isInterrupted()) {
+                        try {
+                            if (mMediaPlayer.isPlaying()) {
+                                Message msg = new Message();
+                                msg.what = mMediaPlayer.getCurrentPosition();
+                                msg.arg1 = mMediaPlayer.getDuration();
+                                handler.sendMessage(msg);
+                                Thread.sleep(1000);
+                            }
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
                         }
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
                     }
                 }
-            }
-        });
-        thread.start();
-
-        if (npBtn){
-            npBtn = false;
-            thread.interrupt();
+            });
+            thread.setName("Music");
+            thread.start();
         }
     }
 
@@ -409,7 +408,6 @@ public class PlayerActivity extends AppCompatActivity {
     };
 
     public void musicNext(boolean btn) {
-        npBtn = true;
         if (btn) {
             SharedPreferences pref = getSharedPreferences("Setting", MODE_PRIVATE);
             final SharedPreferences.Editor edit = pref.edit();
@@ -417,11 +415,7 @@ public class PlayerActivity extends AppCompatActivity {
             edit.putBoolean("task", false);
             position = shuffleBoolean ? getRandom(Asongs.size() + 1) : (position + 1) % Asongs.size();
         } else {
-            if (shuffleBoolean && !repeatBoolean) {
-                position = getRandom(Asongs.size() + 1);
-            } else if (!shuffleBoolean && !repeatBoolean) {
-                position = (position + 1) % Asongs.size();
-            }
+            position = shuffleBoolean & !repeatBoolean ? getRandom(Asongs.size() + 1) : !shuffleBoolean & !repeatBoolean ? (position + 1) % Asongs.size() : position;
         }
         try {
             setPosition(position);
@@ -437,7 +431,6 @@ public class PlayerActivity extends AppCompatActivity {
         if (mMediaPlayer.getCurrentPosition() >= 1000) {
             mMediaPlayer.seekTo(0);
         } else {
-            npBtn = true;
             if (btn) {
                 SharedPreferences pref = getSharedPreferences("Setting", MODE_PRIVATE);
                 final SharedPreferences.Editor edit = pref.edit();
@@ -445,11 +438,7 @@ public class PlayerActivity extends AppCompatActivity {
                 edit.putBoolean("task", false);
                 position = shuffleBoolean ? getRandom(Asongs.size()) : (position - 1) < 0 ? (Asongs.size() - 1) : (position - 1);
             } else {
-                if (shuffleBoolean && !repeatBoolean) {
-                    position = getRandom(Asongs.size());
-                } else if (!shuffleBoolean && !repeatBoolean) {
-                    position = (position - 1) < 0 ? (Asongs.size() - 1) : (position - 1);
-                }
+                position = shuffleBoolean & !repeatBoolean ? getRandom(Asongs.size()) : !shuffleBoolean & !repeatBoolean ? (position - 1) < 0 ? (Asongs.size() - 1) : (position - 1) : position;
             }
             try {
                 setPosition(position);
