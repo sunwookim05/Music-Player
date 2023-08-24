@@ -217,7 +217,6 @@ public class PlayerActivity extends AppCompatActivity {
             } catch (Exception e) {
                 Glide.with(this).load(R.drawable.track).into(imageView);
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -232,12 +231,10 @@ public class PlayerActivity extends AppCompatActivity {
                     mMediaPlayer.seekTo(progress * 1000);
                 }
             }
-
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
                 PlayerActivity.getInstance().pause();
             }
-
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 PlayerActivity.getInstance().play();
@@ -258,7 +255,6 @@ public class PlayerActivity extends AppCompatActivity {
         //셔플,한곡반복 on/off 저장
         SharedPreferences pref = getSharedPreferences("Setting", MODE_PRIVATE);
         final SharedPreferences.Editor edit = pref.edit();
-
         //뒤로가기
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -266,7 +262,6 @@ public class PlayerActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-
         //재생,중지
         pause.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -274,7 +269,6 @@ public class PlayerActivity extends AppCompatActivity {
                 play();
             }
         });
-
         //이전곡
         prev.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -282,7 +276,6 @@ public class PlayerActivity extends AppCompatActivity {
                 musicPrev(true);
             }
         });
-
         //다음곡
         next.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -290,7 +283,6 @@ public class PlayerActivity extends AppCompatActivity {
                 musicNext(true);
             }
         });
-
         //셔플
         shuffle_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -301,7 +293,6 @@ public class PlayerActivity extends AppCompatActivity {
                 edit.commit();
             }
         });
-
         //한곡반복
         repeat_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -329,7 +320,7 @@ public class PlayerActivity extends AppCompatActivity {
             setData(position);
             MainActivity.getInstance().sendOnChannel(name, artist, position);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
 
         try {
@@ -365,7 +356,6 @@ public class PlayerActivity extends AppCompatActivity {
 
         });
         initiateSeekBar();
-
         //재생 위치 1초마다 표시
         if(canRun) {
             canRun = false;
