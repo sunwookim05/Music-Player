@@ -128,24 +128,16 @@ public class  MainActivity extends AppCompatActivity {
         if(ContextCompat.checkSelfPermission(MainActivity.this,Manifest.permission.READ_EXTERNAL_STORAGE)==PackageManager.PERMISSION_DENIED){
             requestStoragePermission();
         }else {
-         start();
+            start();
         }
 
-       if(PlayerActivity.playin){
-           imageView.setBackgroundResource(R.drawable.ic_baseline_pause);
-       }else{
-           imageView.setBackgroundResource(R.drawable.ic_baseline_play_arrow);
-       }
-
+       imageView.setBackgroundResource(PlayerActivity.playin ? R.drawable.ic_baseline_pause : R.drawable.ic_baseline_play_arrow);
     }
 
     private void titleBar(){
         ActionBar actionBar=getSupportActionBar();
-        if(hideTitle){
-            actionBar.hide();
-        }else{
-            actionBar.show();
-        }
+        if(hideTitle) actionBar.hide();
+        else actionBar.show();
     }
 
     public static void hideAll(boolean hide){
@@ -168,11 +160,7 @@ public class  MainActivity extends AppCompatActivity {
                 final SharedPreferences.Editor edit = pref.edit();
                 taskback = false;
                 edit.putBoolean("task",false);
-                if(PlayerActivity.playin){
-                    imageView.setBackgroundResource(R.drawable.ic_baseline_pause);
-                }else {
-                    imageView.setBackgroundResource(R.drawable.ic_baseline_play_arrow);
-                }
+                imageView.setBackgroundResource(PlayerActivity.playin ? R.drawable.ic_baseline_pause : R.drawable.ic_baseline_play_arrow);
                 try{
                     PlayerActivity.getInstance().play();
                 }catch(NullPointerException e){
@@ -204,7 +192,6 @@ public class  MainActivity extends AppCompatActivity {
 
    //권한
     private void requestStoragePermission(){
-
         if(ActivityCompat.shouldShowRequestPermissionRationale(this, READ_MEDIA_AUDIO)){
             new AlertDialog.Builder(this).setTitle("Permission Needed").setMessage("Need to read and record songs from your storage.").setPositiveButton("Okay", new DialogInterface.OnClickListener() {
                 @Override
@@ -219,7 +206,7 @@ public class  MainActivity extends AppCompatActivity {
             }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
+                    dialog.dismiss();
                 }
             }).create().show();
 
@@ -234,7 +221,7 @@ public class  MainActivity extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if(requestCode==Storage_Permission_code){
+        if(requestCode == Storage_Permission_code){
             if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                 Toast.makeText(this,"Permission Granted",Toast.LENGTH_SHORT).show();
                 start();
@@ -344,11 +331,7 @@ public class  MainActivity extends AppCompatActivity {
                             .setMediaSession(token))
                     .build();
 
-            if(PlayerActivity.isPlayin()){
-                notification.flags = Notification.FLAG_NO_CLEAR;
-            }else {
-                notification.flags = Notification.FLAG_AUTO_CANCEL;
-            }
+            notification.flags = PlayerActivity.isPlayin() ? Notification.FLAG_NO_CLEAR : Notification.FLAG_AUTO_CANCEL;
             notificationManager.notify(1, notification);
 
     }
