@@ -201,7 +201,6 @@ public class  MainActivity extends AppCompatActivity {
                     }else{
                         ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,RECORD_AUDIO,READ_PHONE_STATE,CALL_PHONE,WAKE_LOCK},Storage_Permission_code);
                     }
-
                 }
             }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                 @Override
