@@ -218,6 +218,43 @@ public class PlayerActivity extends AppCompatActivity {
                 Glide.with(this).load(R.drawable.track).into(imageView);
             }
         } catch (Exception e) {
+            try {
+                String name = Asongs.get(position).getName();
+                String artist = Asongs.get(position).getArtist();
+                songTitle.setText(name);
+                artistname.setText(artist);
+                MainActivity.textView.setText(name);
+                try {
+                    int audioSessionId = mMediaPlayer.getAudioSessionId();
+                    if (audioSessionId != -1) {
+                        mVisualizer.setAudioSessionId(audioSessionId);
+                    }
+                    Glide
+                            .with(getApplicationContext())
+                            .load(ContentUris.withAppendedId(Uri.parse("content://media/external/audio/albumart"), Asongs.get(position).getAlbumID()).toString())
+                            .thumbnail(0.2f)
+                            .centerCrop()
+                            .placeholder(R.drawable.track)
+                            .skipMemoryCache(true)
+                            .diskCacheStrategy(DiskCacheStrategy.NONE)
+                            .listener(new RequestListener<Drawable>() {
+                                @Override
+                                public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                    return false;
+                                }
+                                @Override
+                                public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                    setBackground();
+                                    return false;
+                                }
+                            })
+                            .into(imageView);
+                } catch (Exception ex) {
+                    Glide.with(this).load(R.drawable.track).into(imageView);
+                }
+            } catch (Exception x) {
+                x.printStackTrace();
+            }
             e.printStackTrace();
         }
     }
@@ -397,13 +434,15 @@ public class PlayerActivity extends AppCompatActivity {
     };
 
     public void musicNext(boolean btn) {
+        SharedPreferences pref = getSharedPreferences("Setting", MODE_PRIVATE);
+        final SharedPreferences.Editor edit = pref.edit();
         if (btn) {
-            SharedPreferences pref = getSharedPreferences("Setting", MODE_PRIVATE);
-            final SharedPreferences.Editor edit = pref.edit();
             taskback = false;
             edit.putBoolean("task", false);
             position = shuffleBoolean ? getRandom(Asongs.size() + 1) : (position + 1) % Asongs.size();
         } else {
+            taskback = false;
+            edit.putBoolean("task", false);
             position = shuffleBoolean & !repeatBoolean ? getRandom(Asongs.size() + 1) : !shuffleBoolean & !repeatBoolean ? (position + 1) % Asongs.size() : position;
         }
         try {
@@ -412,21 +451,23 @@ public class PlayerActivity extends AppCompatActivity {
             setData(position);
             initPlayer(position);
         }catch (IndexOutOfBoundsException e){
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
     public void musicPrev(boolean btn) {
+        SharedPreferences pref = getSharedPreferences("Setting", MODE_PRIVATE);
+        final SharedPreferences.Editor edit = pref.edit();
         if (mMediaPlayer.getCurrentPosition() >= 1000) {
             mMediaPlayer.seekTo(0);
         } else {
             if (btn) {
-                SharedPreferences pref = getSharedPreferences("Setting", MODE_PRIVATE);
-                final SharedPreferences.Editor edit = pref.edit();
                 taskback = false;
                 edit.putBoolean("task", false);
                 position = shuffleBoolean ? getRandom(Asongs.size()) : (position - 1) < 0 ? (Asongs.size() - 1) : (position - 1);
             } else {
+                taskback = false;
+                edit.putBoolean("task", false);
                 position = shuffleBoolean & !repeatBoolean ? getRandom(Asongs.size()) : !shuffleBoolean & !repeatBoolean ? (position - 1) < 0 ? (Asongs.size() - 1) : (position - 1) : position;
             }
             try {
@@ -451,7 +492,6 @@ public class PlayerActivity extends AppCompatActivity {
         } else {
             pause();
         }
-
     }
 
     public void pause() {

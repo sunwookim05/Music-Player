@@ -41,7 +41,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> im
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v=LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.adapter_view_layout,viewGroup,false);
-        ViewHolder vh=new ViewHolder(v,monclicklisten);
+        ViewHolder vh = new ViewHolder(v,monclicklisten);
         return vh;
     }
 
@@ -130,7 +130,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> im
         return filter;
     }
 
-    private Filter  filter=new Filter() {
+    private Filter  filter = new Filter() {
     @Override
     protected FilterResults performFiltering(CharSequence constraint) {
         List<Song>filteredList=new ArrayList<>();
