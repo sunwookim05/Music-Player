@@ -61,7 +61,7 @@ public class SongAlbumAdapter extends RecyclerView.Adapter<SongAlbumAdapter.View
         OnClickListen onClickListen;
         public ViewHolder(@NonNull View itemView, OnClickListen onClickListen) {
             super(itemView);
-            textView=itemView.findViewById(R.id.text_song);
+            textView = itemView.findViewById(R.id.text_song);
             textView.setTypeface(myfont);
             this.onClickListen=onClickListen;
             itemView.setOnClickListener(this);

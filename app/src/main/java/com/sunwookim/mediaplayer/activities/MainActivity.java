@@ -33,7 +33,6 @@ import java.util.List;
 import java.util.Map;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -83,9 +82,9 @@ public class  MainActivity extends AppCompatActivity {
     static TabLayout tableLayout;
     static ViewPager viewPager;
     protected ViewPagerAdapter viewPagerAdapter;
-    static LinearLayout miniplayer;
-    static TextView textView;
-    public static   ImageView imageView;
+    public static LinearLayout miniplayer;
+    public static TextView textView;
+    public static ImageView imageView;
     public static Notification notification;
     private PlayerActivity playerActivity;
     private static boolean hideTitle = false;
@@ -105,13 +104,13 @@ public class  MainActivity extends AppCompatActivity {
         viewPager=findViewById(R.id.view_Pager);
         viewPagerAdapter=new ViewPagerAdapter(getSupportFragmentManager());
 
-
         viewPagerAdapter.addFragment(new SongsFragment(),"Songs");
         viewPagerAdapter.addFragment(new AlbumsFragment(),"Albums");
 
         viewPager.setAdapter(viewPagerAdapter);
         tableLayout.setupWithViewPager(viewPager);
         ActionBar actionBar=getSupportActionBar();
+        assert actionBar != null;
         actionBar.setElevation(0);
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#00000000")));
         actionBar.setStackedBackgroundDrawable(new ColorDrawable(Color.parseColor("#00000000")));
@@ -125,7 +124,7 @@ public class  MainActivity extends AppCompatActivity {
         mediaSession = new MediaSessionCompat(this, "tag");
         instance=this;
 
-        if(ContextCompat.checkSelfPermission(MainActivity.this,Manifest.permission.READ_EXTERNAL_STORAGE)==PackageManager.PERMISSION_DENIED){
+        if(ContextCompat.checkSelfPermission(MainActivity.this, Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU ? Manifest.permission.READ_MEDIA_AUDIO : Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED){
             requestStoragePermission();
         }else {
             start();
@@ -135,7 +134,8 @@ public class  MainActivity extends AppCompatActivity {
     }
 
     private void titleBar(){
-        ActionBar actionBar=getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
         if(hideTitle) actionBar.hide();
         else actionBar.show();
     }
@@ -197,7 +197,7 @@ public class  MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                        ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,RECORD_AUDIO,READ_PHONE_STATE,CALL_PHONE,WAKE_LOCK,READ_MEDIA_AUDIO,READ_MEDIA_IMAGES,READ_MEDIA_VIDEO},Storage_Permission_code);
+                        ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.RECORD_AUDIO,READ_PHONE_STATE,CALL_PHONE,WAKE_LOCK,READ_MEDIA_AUDIO},Storage_Permission_code);
                     }else{
                         ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,RECORD_AUDIO,READ_PHONE_STATE,CALL_PHONE,WAKE_LOCK},Storage_Permission_code);
                     }
@@ -211,13 +211,13 @@ public class  MainActivity extends AppCompatActivity {
 
         }else{
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, RECORD_AUDIO, READ_PHONE_STATE, CALL_PHONE, WAKE_LOCK, READ_MEDIA_AUDIO, READ_MEDIA_IMAGES, READ_MEDIA_VIDEO}, Storage_Permission_code);
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO, READ_PHONE_STATE, CALL_PHONE, WAKE_LOCK, READ_MEDIA_AUDIO}, Storage_Permission_code);
             }else{
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,RECORD_AUDIO,READ_PHONE_STATE,CALL_PHONE,WAKE_LOCK},Storage_Permission_code);
             }
         }
     }
-
+    
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if(requestCode == Storage_Permission_code){
@@ -288,12 +288,7 @@ public class  MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.getInstance(), PlayerActivity.class).putExtra("index", 0).putExtra("val", 0).putExtra("from",false);
             PendingIntent content = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_MUTABLE);
 
-            int plaorpa;
-            if(PlayerActivity.playin){
-                plaorpa=R.drawable.ic_baseline_pause;
-            }else{
-                plaorpa=R.drawable.ic_baseline_play_arrow;
-            }
+            int plaorpa = PlayerActivity.isPlayin() ? R.drawable.ic_baseline_pause : R.drawable.ic_baseline_play_arrow;
             metadataRetriever = new MediaMetadataRetriever();
             try {
                 metadataRetriever.setDataSource(songs.get(position).getPath());
