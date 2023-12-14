@@ -321,8 +321,8 @@ public class  MainActivity extends AppCompatActivity {
                     .addAction(R.drawable.next_24dp, "Next", playbackAction(2))
                     .setContentIntent(content)
                     .setStyle(new NotificationCompat.MediaStyle()
-                            .setShowActionsInCompactView(0, 1, 2)
-                            .setMediaSession(token))
+                            .setMediaSession(token)
+                            .setShowActionsInCompactView(0, 1, 2))
                     .build();
 
             notification.flags = PlayerActivity.isPlayin() ? Notification.FLAG_NO_CLEAR : Notification.FLAG_AUTO_CANCEL;
