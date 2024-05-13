@@ -83,16 +83,6 @@ public class PlayerActivity extends AppCompatActivity {
         return position;
     }
 
-    public int getActivity() {
-        if (taskback == false) {
-            Intent intent = new Intent(MainActivity.getInstance(), PlayerActivity.class).putExtra("index", 0).putExtra("val", 0).putExtra("from", false);
-            startActivity(intent);
-        } else {
-            setData(position);
-        }
-        return position;
-    }
-
     public void resetPlayer() {
         position = (position - 1) % Asongs.size();
         MainActivity.getInstance().sendOnChannel(Asongs.get(position).getName(), Asongs.get(position).getArtist(), position);
@@ -476,7 +466,7 @@ public class PlayerActivity extends AppCompatActivity {
                 setData(position);
                 initPlayer(position);
             }catch (IndexOutOfBoundsException e){
-                System.out.println(e);
+                e.printStackTrace();
             }
         }
     }
@@ -536,18 +526,8 @@ public class PlayerActivity extends AppCompatActivity {
 
     @Override
     public void onPause() {
-        try {
-            super.onPause();
-            try {
-                Thread.sleep(10);
-                super.onStart();
-                super.onResume();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-        }
+        super.onPause();
+        super.onResume();
     }
 
     //뒤로가기
