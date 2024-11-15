@@ -19,6 +19,7 @@ android {
         }
     }
     namespace 'com.sunwookim.mediaplayer'
+    buildToolsVersion '34.0.0'
 }
 
 dependencies {

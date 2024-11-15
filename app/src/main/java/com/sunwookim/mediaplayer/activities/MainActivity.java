@@ -168,7 +168,6 @@ public class  MainActivity extends AppCompatActivity {
                 }
             }
         });
-
         miniplayer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

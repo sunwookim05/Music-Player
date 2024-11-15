@@ -83,14 +83,6 @@ public class PlayerActivity extends AppCompatActivity {
         return position;
     }
 
-    public int getActivity() {
-        if (taskback == false) {
-            Intent intent = new Intent(MainActivity.getInstance(), PlayerActivity.class).putExtra("index", 0).putExtra("val", 0).putExtra("from", false);
-            startActivity(intent);
-        } else setData(position);
-        return position;
-    }
-
     public void resetPlayer() {
         position = (position - 1) % Asongs.size();
         MainActivity.getInstance().sendOnChannel(Asongs.get(position).getName(), Asongs.get(position).getArtist(), position);
@@ -102,7 +94,9 @@ public class PlayerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getActionBar() != null) getActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getActionBar() != null) {
+            getActionBar().setDisplayHomeAsUpEnabled(true);
+        }
         setContentView(R.layout.activity_player);
 
         SharedPreferences pref = getSharedPreferences("Setting", MODE_PRIVATE);
@@ -187,66 +181,29 @@ public class PlayerActivity extends AppCompatActivity {
                 int audioSessionId = mMediaPlayer.getAudioSessionId();
                 if (audioSessionId != -1) mVisualizer.setAudioSessionId(audioSessionId);
                 Glide
-                        .with(getApplicationContext())
-                        .load(ContentUris.withAppendedId(Uri.parse("content://media/external/audio/albumart"), Asongs.get(position).getAlbumID()).toString())
-                        .thumbnail(0.2f)
-                        .centerCrop()
-                        .placeholder(R.drawable.track)
-                        .skipMemoryCache(true)
-                        .diskCacheStrategy(DiskCacheStrategy.NONE)
-                        .listener(new RequestListener<Drawable>() {
-                            @Override
-                            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                                return false;
-                            }
-                            @Override
-                            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                                setBackground();
-                                return false;
-                            }
-                        })
-                        .into(imageView);
+                    .with(getApplicationContext())
+                    .load(ContentUris.withAppendedId(Uri.parse("content://media/external/audio/albumart"), Asongs.get(position).getAlbumID()).toString())
+                    .thumbnail(0.2f)
+                    .centerCrop()
+                    .placeholder(R.drawable.track)
+                    .skipMemoryCache(true)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .listener(new RequestListener<Drawable>() {
+                        @Override
+                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                            return false;
+                        }
+                        @Override
+                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                            setBackground();
+                            return false;
+                        }
+                    })
+                    .into(imageView);
             } catch (Exception e) {
                 Glide.with(this).load(R.drawable.track).into(imageView);
             }
         } catch (Exception e) {
-            try {
-                String name = Asongs.get(position).getName();
-                String artist = Asongs.get(position).getArtist();
-                songTitle.setText(name);
-                artistname.setText(artist);
-                MainActivity.textView.setText(name);
-                try {
-                    int audioSessionId = mMediaPlayer.getAudioSessionId();
-                    if (audioSessionId != -1) {
-                        mVisualizer.setAudioSessionId(audioSessionId);
-                    }
-                    Glide
-                            .with(getApplicationContext())
-                            .load(ContentUris.withAppendedId(Uri.parse("content://media/external/audio/albumart"), Asongs.get(position).getAlbumID()).toString())
-                            .thumbnail(0.2f)
-                            .centerCrop()
-                            .placeholder(R.drawable.track)
-                            .skipMemoryCache(true)
-                            .diskCacheStrategy(DiskCacheStrategy.NONE)
-                            .listener(new RequestListener<Drawable>() {
-                                @Override
-                                public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                                    return false;
-                                }
-                                @Override
-                                public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                                    setBackground();
-                                    return false;
-                                }
-                            })
-                            .into(imageView);
-                } catch (Exception ex) {
-                    Glide.with(this).load(R.drawable.track).into(imageView);
-                }
-            } catch (Exception x) {
-                x.printStackTrace();
-            }
             e.printStackTrace();
         }
     }
@@ -256,9 +213,7 @@ public class PlayerActivity extends AppCompatActivity {
         mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if (fromUser) {
-                    mMediaPlayer.seekTo(progress * 1000);
-                }
+                if (fromUser) mMediaPlayer.seekTo(progress * 1000);
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
@@ -269,7 +224,6 @@ public class PlayerActivity extends AppCompatActivity {
                 PlayerActivity.getInstance().play();
             }
         });
-
     }
 
     //렌덤
@@ -280,7 +234,6 @@ public class PlayerActivity extends AppCompatActivity {
 
     //버튼
     public void Buttons() {
-
         //셔플,한곡반복 on/off 저장
         SharedPreferences pref = getSharedPreferences("Setting", MODE_PRIVATE);
         final SharedPreferences.Editor edit = pref.edit();
@@ -353,9 +306,7 @@ public class PlayerActivity extends AppCompatActivity {
             resetPlayer();
         }
         int audioSessionId = mMediaPlayer.getAudioSessionId();
-        if (audioSessionId != -1) {
-            mVisualizer.setAudioSessionId(audioSessionId);
-        }
+        if (audioSessionId != -1) mVisualizer.setAudioSessionId(audioSessionId);
         mMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
@@ -364,16 +315,15 @@ public class PlayerActivity extends AppCompatActivity {
                 mSeekBar.setMax(mMediaPlayer.getDuration() / 1000);
                 mMediaPlayer.start();
                 pause.setBackgroundResource(R.drawable.ic_baseline_pause);
-
             }
         });
+
         //음악이 끝났을때
         mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
                 musicNext(false);
             }
-
         });
         initiateSeekBar();
         //재생 위치 1초마다 표시
@@ -459,7 +409,7 @@ public class PlayerActivity extends AppCompatActivity {
                 setData(position);
                 initPlayer(position);
             }catch (IndexOutOfBoundsException e){
-                System.out.println(e);
+                e.printStackTrace();
             }
         }
     }
@@ -517,18 +467,8 @@ public class PlayerActivity extends AppCompatActivity {
 
     @Override
     public void onPause() {
-        try {
-            super.onPause();
-            try {
-                Thread.sleep(10);
-                super.onStart();
-                super.onResume();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-        }
+        super.onPause();
+        super.onResume();
     }
 
     //뒤로가기
