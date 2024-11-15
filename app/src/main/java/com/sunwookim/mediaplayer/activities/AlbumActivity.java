@@ -93,24 +93,19 @@ public class AlbumActivity extends AppCompatActivity implements OnClickListen {
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                         return false;
                     }
-
                     @Override
                     public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
                         setBack();
                         return false;
                     }
-                })
-                .into(imageView);
+                }).into(imageView);
 
-        DividerItemDecoration verticalDecoration = new DividerItemDecoration(this,
-                DividerItemDecoration.HORIZONTAL);
+        DividerItemDecoration verticalDecoration = new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL);
         Drawable verticalDivider = ContextCompat.getDrawable(this, R.drawable.line_divider);
         verticalDecoration.setDrawable(verticalDivider);
         recyclerView.addItemDecoration(verticalDecoration);
-
         recyclerView.setLayoutManager(mmanager);
         recyclerView.setAdapter(songalbumAdapter);
-
     }
 
     public static void hideAll(boolean hide){
@@ -131,7 +126,6 @@ public class AlbumActivity extends AppCompatActivity implements OnClickListen {
 
     public void setBack(){
         Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
-
         Palette.from(bitmap).maximumColorCount(40).generate(new Palette.PaletteAsyncListener() {
             @Override
             public void onGenerated(Palette palette) {

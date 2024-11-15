@@ -19,7 +19,6 @@ public class CallStateReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.d(TAG, "Call");
-
         // 전화 수신 체크
         CallReceivedChk(context, intent);
     }
@@ -30,11 +29,8 @@ public class CallStateReceiver extends BroadcastReceiver {
             @Override
             public void onCallStateChanged(int state, String incomingNumber) {
                 String mState = String.valueOf(state);
-                if (mState.equals(mLastState)) {
-                    return;
-                } else {
-                    mLastState = mState;
-                }
+                if (mState.equals(mLastState)) return;
+                else mLastState = mState;
 
                 switch (state) {
                     case TelephonyManager.CALL_STATE_IDLE:

@@ -28,8 +28,8 @@ public class SongAlbumAdapter extends RecyclerView.Adapter<SongAlbumAdapter.View
     public SongAlbumAdapter(ArrayList<Song>albumSong,OnClickListen alclicklisten){
         this.alclicklisten = alclicklisten;
         inflater=(LayoutInflater) MainActivity.getInstance().getSystemService(MainActivity.getInstance().LAYOUT_INFLATER_SERVICE);
-        this.albumSong=albumSong;
-        }
+        this.albumSong = albumSong;
+    }
 
     @NonNull
     @Override
@@ -41,8 +41,7 @@ public class SongAlbumAdapter extends RecyclerView.Adapter<SongAlbumAdapter.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         Song song= albumSong.get(i);
-        viewHolder.textView.setText(" -  "+song.getName());
-
+        viewHolder.textView.setText(" -  " + song.getName());
     }
 
     @Override
@@ -66,7 +65,6 @@ public class SongAlbumAdapter extends RecyclerView.Adapter<SongAlbumAdapter.View
             this.onClickListen=onClickListen;
             itemView.setOnClickListener(this);
         }
-
         @Override
         public void onClick(View v) {
             onClickListen.onClick(getAdapterPosition());

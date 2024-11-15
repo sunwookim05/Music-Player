@@ -168,7 +168,6 @@ public class  MainActivity extends AppCompatActivity {
                 }
             }
         });
-
         miniplayer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -176,9 +175,8 @@ public class  MainActivity extends AppCompatActivity {
                 final SharedPreferences.Editor edit = pref.edit();
                 taskback = false;
                 edit.putBoolean("task",false);
-                if(songs.isEmpty()) {
-                    Toast.makeText(MainActivity.this, "There are no playlists.", Toast.LENGTH_SHORT).show();
-                }else{
+                if(songs.isEmpty()) Toast.makeText(MainActivity.this, "There are no playlists.", Toast.LENGTH_SHORT).show();
+                else{
                     Intent intent = new Intent(MainActivity.this, PlayerActivity.class);
                     startActivity(intent);
                 }
@@ -196,11 +194,8 @@ public class  MainActivity extends AppCompatActivity {
             new AlertDialog.Builder(this).setTitle("Permission Needed").setMessage("Need to read and record songs from your storage.").setPositiveButton("Okay", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                        ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.RECORD_AUDIO,READ_PHONE_STATE,CALL_PHONE,WAKE_LOCK,READ_MEDIA_AUDIO},Storage_Permission_code);
-                    }else{
-                        ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,RECORD_AUDIO,READ_PHONE_STATE,CALL_PHONE,WAKE_LOCK},Storage_Permission_code);
-                    }
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.RECORD_AUDIO,READ_PHONE_STATE,CALL_PHONE,WAKE_LOCK,READ_MEDIA_AUDIO},Storage_Permission_code);
+                    else ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,RECORD_AUDIO,READ_PHONE_STATE,CALL_PHONE,WAKE_LOCK},Storage_Permission_code);
                 }
             }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                 @Override
@@ -208,13 +203,9 @@ public class  MainActivity extends AppCompatActivity {
                     dialog.dismiss();
                 }
             }).create().show();
-
         }else{
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO, READ_PHONE_STATE, CALL_PHONE, WAKE_LOCK, READ_MEDIA_AUDIO}, Storage_Permission_code);
-            }else{
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,RECORD_AUDIO,READ_PHONE_STATE,CALL_PHONE,WAKE_LOCK},Storage_Permission_code);
-            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO, READ_PHONE_STATE, CALL_PHONE, WAKE_LOCK, READ_MEDIA_AUDIO}, Storage_Permission_code);
+            else ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,RECORD_AUDIO,READ_PHONE_STATE,CALL_PHONE,WAKE_LOCK},Storage_Permission_code);
         }
     }
     
@@ -224,9 +215,7 @@ public class  MainActivity extends AppCompatActivity {
             if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                 Toast.makeText(this,"Permission Granted",Toast.LENGTH_SHORT).show();
                 start();
-            }else{
-                Toast.makeText(this,"Permission Denied",Toast.LENGTH_SHORT).show();
-            }
+            }else Toast.makeText(this,"Permission Denied",Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -263,7 +252,7 @@ public class  MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater=getMenuInflater();
         inflater.inflate(R.menu.search_menu,menu);
-        MenuItem searchItem=menu.findItem(R.id.action_search);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
 
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
@@ -275,7 +264,7 @@ public class  MainActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-               SongsFragment.search(newText);
+                SongsFragment.search(newText);
                 return false;
             }
         });
@@ -284,7 +273,6 @@ public class  MainActivity extends AppCompatActivity {
 
     //알림 생성
     public void sendOnChannel(String name,String artist,int position){
-        //▶❚❚ ▷| |◁
             Intent intent = new Intent(MainActivity.getInstance(), PlayerActivity.class).putExtra("index", 0).putExtra("val", 0).putExtra("from",false);
             PendingIntent content = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_MUTABLE);
 
@@ -321,8 +309,8 @@ public class  MainActivity extends AppCompatActivity {
                     .addAction(R.drawable.next_24dp, "Next", playbackAction(2))
                     .setContentIntent(content)
                     .setStyle(new NotificationCompat.MediaStyle()
-                            .setShowActionsInCompactView(0, 1, 2)
-                            .setMediaSession(token))
+                            .setMediaSession(token)
+                            .setShowActionsInCompactView(0, 1, 2))
                     .build();
 
             notification.flags = PlayerActivity.isPlayin() ? Notification.FLAG_NO_CLEAR : Notification.FLAG_AUTO_CANCEL;
