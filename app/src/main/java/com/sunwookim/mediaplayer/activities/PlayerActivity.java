@@ -87,9 +87,7 @@ public class PlayerActivity extends AppCompatActivity {
         if (taskback == false) {
             Intent intent = new Intent(MainActivity.getInstance(), PlayerActivity.class).putExtra("index", 0).putExtra("val", 0).putExtra("from", false);
             startActivity(intent);
-        } else {
-            setData(position);
-        }
+        } else setData(position);
         return position;
     }
 
@@ -104,9 +102,7 @@ public class PlayerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getActionBar() != null) {
-            getActionBar().setDisplayHomeAsUpEnabled(true);
-        }
+        if (getActionBar() != null) getActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_player);
 
         SharedPreferences pref = getSharedPreferences("Setting", MODE_PRIVATE);
@@ -157,9 +153,7 @@ public class PlayerActivity extends AppCompatActivity {
             position = instance.position;
             setData(position);
         } else {
-            if (mMediaPlayer != null) {
-                mMediaPlayer.stop();
-            }
+            if (mMediaPlayer != null) mMediaPlayer.stop();
             instance = this;
             Asongs = val == 1 ? SongAlbumAdapter.albumSong : SongAdapter.songs;
             try {
@@ -191,9 +185,7 @@ public class PlayerActivity extends AppCompatActivity {
             MainActivity.textView.setText(name);
             try {
                 int audioSessionId = mMediaPlayer.getAudioSessionId();
-                if (audioSessionId != -1) {
-                    mVisualizer.setAudioSessionId(audioSessionId);
-                }
+                if (audioSessionId != -1) mVisualizer.setAudioSessionId(audioSessionId);
                 Glide
                         .with(getApplicationContext())
                         .load(ContentUris.withAppendedId(Uri.parse("content://media/external/audio/albumart"), Asongs.get(position).getAlbumID()).toString())
@@ -344,13 +336,8 @@ public class PlayerActivity extends AppCompatActivity {
 
     //음악 위치
     public void initPlayer(final int position) {
-
         playin = true;
-
-        if (mMediaPlayer != null && mMediaPlayer.isPlaying()) {
-            mMediaPlayer.reset();
-        }
-
+        if (mMediaPlayer != null && mMediaPlayer.isPlaying()) mMediaPlayer.reset();
         try {
             String name = Asongs.get(position).getName();
             String artist = Asongs.get(position).getArtist();
@@ -359,19 +346,16 @@ public class PlayerActivity extends AppCompatActivity {
         } catch (IndexOutOfBoundsException e) {
             e.printStackTrace();
         }
-
         try {
             mMediaPlayer = MediaPlayer.create(getApplicationContext(), Uri.parse(Asongs.get(position).getPath()));
         } catch (Exception e) {
             e.printStackTrace();
             resetPlayer();
         }
-
         int audioSessionId = mMediaPlayer.getAudioSessionId();
         if (audioSessionId != -1) {
             mVisualizer.setAudioSessionId(audioSessionId);
         }
-
         mMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
@@ -383,7 +367,6 @@ public class PlayerActivity extends AppCompatActivity {
 
             }
         });
-
         //음악이 끝났을때
         mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
@@ -489,9 +472,7 @@ public class PlayerActivity extends AppCompatActivity {
             pause.setBackgroundResource(R.drawable.ic_baseline_pause);
             MainActivity.getInstance().sendOnChannel( Asongs.get(position).getName(), Asongs.get(position).getArtist(),position);
             MainActivity.imageView.setBackgroundResource(R.drawable.ic_baseline_pause);
-        } else {
-            pause();
-        }
+        } else pause();
     }
 
     public void pause() {

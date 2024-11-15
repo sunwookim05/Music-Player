@@ -88,7 +88,7 @@
 
             <com.gauravk.audiovisualizer.visualizer.BarVisualizer
                 android:id="@+id/bar"
-                android:layout_width="410dp"
+                android:layout_width="420dp"
                 android:layout_height="80dp"
                 android:background="@android:color/transparent"
                 app:avColor="#BFFFFFFF"
@@ -97,6 +97,7 @@
                 app:avType="outline"
                 app:avWidth="1dp"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

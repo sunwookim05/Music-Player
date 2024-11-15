@@ -12,7 +12,7 @@ public class NofiticationCenter extends Application {
     public void onCreate() {
         super.onCreate();
         createNofitication();
-     }
+    }
 
    private void createNofitication() {
        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

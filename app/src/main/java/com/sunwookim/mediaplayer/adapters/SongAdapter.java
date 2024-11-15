@@ -57,18 +57,18 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> im
             viewHolder.textview1.setTextColor(Color.parseColor("#E7DBDB"));
             try {
                 Glide
-                        .with(context)
-                        .load(ContentUris.withAppendedId(Uri.parse("content://media/external/audio/albumart"), song.getAlbumID()).toString())
-                        .apply(new RequestOptions()
-                                .placeholder(R.drawable.track_2_min)
-                                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                                .skipMemoryCache(true)
-                        )
-                        .thumbnail(0.1f)
-                        .transition(new DrawableTransitionOptions()
-                                .crossFade()
-                        )
-                        .into(viewHolder.mImageView);
+                    .with(context)
+                    .load(ContentUris.withAppendedId(Uri.parse("content://media/external/audio/albumart"), song.getAlbumID()).toString())
+                    .apply(new RequestOptions()
+                            .placeholder(R.drawable.track_2_min)
+                            .diskCacheStrategy(DiskCacheStrategy.NONE)
+                            .skipMemoryCache(true)
+                    )
+                    .thumbnail(0.1f)
+                    .transition(new DrawableTransitionOptions()
+                            .crossFade()
+                    )
+                    .into(viewHolder.mImageView);
                 return;
                 }catch (Exception e) {
                 e.printStackTrace();
@@ -106,8 +106,6 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> im
         }
 
     }
-
-
 
     public Song getSong(int position){
         return allSongs.get(position);

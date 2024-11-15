@@ -51,7 +51,6 @@ public class SongsFragment extends Fragment implements OnClickListen {
         }
     }
 
-
     @Override
     public void onClick(int position) {
         MainActivity.hideAll(true);

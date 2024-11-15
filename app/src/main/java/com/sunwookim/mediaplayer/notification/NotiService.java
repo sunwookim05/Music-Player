@@ -14,7 +14,6 @@ import com.sunwookim.mediaplayer.activities.PlayerActivity;
 import java.util.Random;
 
 public class NotiService extends Service {
-
     private NotificationManagerCompat notificationManager;
     public static boolean playin, shuffleBoolean, repeatBoolean;
     private PlayerActivity playerActivity;
@@ -46,20 +45,12 @@ public class NotiService extends Service {
     //알림창에서 컨트롤
     private void handleIncomingActions(Intent playbackAction) {
         if (playbackAction == null || playbackAction.getAction() == null) return;
-
         String actionString = playbackAction.getAction();
-
-        if (actionString.equalsIgnoreCase("com.mypackage.ACTION_PAUSE_MUSIC")) {
-            if( PlayerActivity.playin){
-                PlayerActivity.getInstance().pause();
-            }else{
-                PlayerActivity.getInstance().play();
-            }
-        } else if (actionString.equalsIgnoreCase("com.mypackage.ACTION_NEXT_MUSIC")) {
-                PlayerActivity.getInstance().musicNext(true);
-        } else if (actionString.equalsIgnoreCase("com.mypackage.ACTION_PREV_MUSIC")) {
-                PlayerActivity.getInstance().musicPrev(true);
-        }
+        if (actionString.equalsIgnoreCase("com.mypackage.ACTION_PAUSE_MUSIC"))
+            if( PlayerActivity.playin) PlayerActivity.getInstance().pause();
+            else PlayerActivity.getInstance().play();
+        else if (actionString.equalsIgnoreCase("com.mypackage.ACTION_NEXT_MUSIC")) PlayerActivity.getInstance().musicNext(true);
+        else if (actionString.equalsIgnoreCase("com.mypackage.ACTION_PREV_MUSIC")) PlayerActivity.getInstance().musicPrev(true);
     }
 
     @Nullable

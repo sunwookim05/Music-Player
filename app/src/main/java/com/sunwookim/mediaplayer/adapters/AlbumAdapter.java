@@ -47,18 +47,18 @@ public class AlbumAdapter  extends RecyclerView.Adapter<AlbumAdapter.ViewHolder>
         viewHolder.album.setText(song.getAlbum());
         viewHolder.artist.setText(song.getArtist());
         Glide
-                .with(MainActivity.getInstance())
-                .load(ContentUris.withAppendedId(Uri.parse("content://media/external/audio/albumart"),song.getAlbumID()).toString())
-                .apply(new RequestOptions()
-                        .placeholder(R.drawable.xd)
-                        .diskCacheStrategy(DiskCacheStrategy.NONE)
-                        .skipMemoryCache(true)
-                )
-                .thumbnail(0.1f)
-                .transition(new DrawableTransitionOptions()
-                        .crossFade()
-                )
-                .into(viewHolder.imageView);
+            .with(MainActivity.getInstance())
+            .load(ContentUris.withAppendedId(Uri.parse("content://media/external/audio/albumart"),song.getAlbumID()).toString())
+            .apply(new RequestOptions()
+                    .placeholder(R.drawable.xd)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true)
+            )
+            .thumbnail(0.1f)
+            .transition(new DrawableTransitionOptions()
+                    .crossFade()
+            )
+            .into(viewHolder.imageView);
     }
 
     @Override

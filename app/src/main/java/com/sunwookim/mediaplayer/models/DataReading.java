@@ -50,13 +50,9 @@ public class DataReading {
                 audioModel.setPath(path);
                 audioModel.setAlbumID(albumID);
                 songs.add(audioModel);
-                if(albums.get(album)==null){
-                    albums.put(album,new ArrayList<Song>());
-                }
+                if(albums.get(album) == null) albums.put(album,new ArrayList<Song>());
                 albums.get(album).add(audioModel);
-                if(Artists.get(artist)==null){
-                    Artists.put(artist,new ArrayList<Song>());
-                }
+                if(Artists.get(artist) == null) Artists.put(artist,new ArrayList<Song>());
                 Artists.get(artist).add(audioModel);
             }
             c.close();
